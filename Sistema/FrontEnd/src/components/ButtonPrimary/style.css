@@ -1,0 +1,50 @@
+.button-primary {
+    align-items: center;
+    border-radius: 100px;
+    display: inline-flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 20px;
+    position: relative;
+  }
+  
+  .button-primary .boton-2 {
+    color: var(--grisesblanco);
+    font-family: var(--subtitle-regular-font-family);
+    font-size: var(--subtitle-regular-font-size);
+    font-style: var(--subtitle-regular-font-style);
+    font-weight: var(--subtitle-regular-font-weight);
+    letter-spacing: var(--subtitle-regular-letter-spacing);
+    line-height: var(--subtitle-regular-line-height);
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .button-primary.empresa-2-acm {
+  }
+  
+  .button-primary.empresa-2-ghamec {
+  }
+  
+  .button-primary.empresa-2-eco {
+  }
+  
+  .button-primary:hover {
+    border: 1px solid;
+  }
+  
+  .button-primary:hover.empresa-2-acm {
+    border-color: var(--acm);
+    box-shadow: var(--glow);
+  }
+  
+  .button-primary:hover.empresa-2-ghamec {
+    border-color: var(--ghamec);
+    box-shadow: 0px 0px 4px #000069cc, 0px 0px 20px #000069cc;
+  }
+  
+  .button-primary:hover.empresa-2-eco {
+    box-shadow: 0px 0px 4px #6bbd5bcc, 0px 0px 20px #6bbd5bcc;
+  }
+  

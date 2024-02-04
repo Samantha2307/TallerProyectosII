@@ -1,0 +1,141 @@
+.aside {
+    align-items: flex-start;
+    background-color: var(--lienzo-2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .aside .logo {
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 24px;
+    position: relative;
+    padding: 10px; 
+  }
+  
+  .aside .mask-group {
+    position: relative;
+    width: 49px;
+  }
+  
+  .aside .ACM-ingenieros {
+    font-family: var(--text-bold-font-family);
+    font-size: var(--text-bold-font-size);
+    font-style: var(--text-bold-font-style);
+    font-weight: var(--text-bold-font-weight);
+    letter-spacing: var(--text-bold-letter-spacing);
+    line-height: var(--text-bold-line-height);
+    position: relative;
+    width: fit-content;
+  }
+  
+  .aside .nav-bar {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
+  
+  .aside .class {
+    margin-right: -52px !important;
+  }
+  
+  .aside .link-2 {
+    align-self: stretch !important;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+  }
+  
+  .aside .class-2 {
+    margin-right: -61px !important;
+  }
+  
+  .aside .class-3 {
+    margin-right: -108px !important;
+  }
+  
+  .aside .class-4 {
+    margin-right: -84px !important;
+  }
+  
+  .aside .class-5 {
+    margin-right: -100px !important;
+  }
+  
+  .aside .class-6 {
+    margin-right: -77px !important;
+  }
+  
+  .aside.expand-false {
+    width: 58px;
+  }
+  
+  .aside.expand-true {
+    width: 250px;
+  }
+  
+  .aside .empresa-0-ghamec {
+    height: 49px;
+  }
+  
+  .aside .empresa-0-eco {
+    height: 49px;
+  }
+  
+  .aside .expand-1-false {
+    height: 49px;
+  }
+  
+  .aside .expand-1-true.empresa-0-acm {
+    height: 52px;
+  }
+  
+  .aside .empresa-1-ghamec {
+    color: var(--ghamec);
+  }
+  
+  .aside .empresa-1-eco {
+    color: var(--eco);
+  }
+  
+  .aside .empresa-1-acm {
+    color: var(--acm);
+  }
+  
+  .aside .empresa-1-ghamec.expand-2-false {
+    margin-right: -82px;
+  }
+  
+  .aside .empresa-1-eco.expand-2-false {
+    margin-right: -129px;
+  }
+  
+  .aside .expand-2-false.empresa-1-acm {
+    margin-right: -138px;
+  }
+  
+  .aside.expand-false .logo {
+    align-self: stretch;
+    display: flex;
+    width: 100%;
+  }
+  
+  .aside.expand-true .logo {
+    display: inline-flex;
+  }
+  
+  .aside .nav-bar,
+.aside .logo
+{
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,35 @@
+footer {
+  font-size: 0.8rem;
+  background-color: #050a04;
+  width: 100%;
+  height: 100%;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  color: white;
+}
+
+footer h3 {
+  padding-bottom: 1rem;
+}
+main {
+  background: #1e1e1e;
+  width: 100%;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.redes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}

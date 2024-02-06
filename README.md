@@ -1,8 +1,11 @@
-<h1>Nombre de Tu Proyecto</h1>
+<h1>QoriStudy - BackEnd</h1>
 
-<img src="tu_logo.png" alt="Tu Logo" />
+<a href="https://tu_enlace_de_logo" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/3921/3921013.png" alt="Tu Logo" />
+</a>
 
-<p>Desarrollado con ❤️ utilizando el framework <a href="https://nestjs.com/" target="_blank">Nest</a>.</p>
+
+<p>Desarrollado con ❤️ para aprobar Proyectos 2 :) >Nest</a>.</p>
 
 <p>
   <a href="tu_enlace_de_circuito_ci" target="_blank">

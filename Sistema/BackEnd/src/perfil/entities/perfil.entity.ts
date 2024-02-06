@@ -1,1 +1,1 @@
-export class Perfil {}
+export class perfil {}

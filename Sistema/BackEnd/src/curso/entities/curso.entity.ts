@@ -1,1 +1,1 @@
-export class Curso {}
+export class curso {}

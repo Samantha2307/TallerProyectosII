@@ -1,11 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CursoService } from './curso.service';
 import { CreateCursoDto } from './dto/create-curso.dto';
 import { UpdateCursoDto } from './dto/update-curso.dto';
+import { CursoFilterNewDto } from './dto/curso-filter-nuevo.dto';
 
 @Controller('curso')
 export class CursoController {
   constructor(private readonly cursoService: CursoService) {}
+
+
+  @Get()
+  filtrarcursos(
+    @Query() filtrarNuevoDto : CursoFilterNewDto,)
+    {
+      try {
+        return this.cursoService.listarcurso(filtrarNuevoDto);
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener la reseña del curso desde Service',
+          message: error.message,
+        };
+      }
+      
+    }
 
   @Post()
   create(@Body() createCursoDto: CreateCursoDto) {

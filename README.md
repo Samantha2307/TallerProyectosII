@@ -1,79 +1,47 @@
-<h1>QoriStudy - BackEnd</h1>
 
-<a href="https://tu_enlace_de_logo" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/3921/3921013.png" alt="Tu Logo" />
-</a>
+# QoriStudy - BackEnd 
+
+Desarrollado con ❤️ utilizando el framework Nest
+
+Para aprobar Proyectos 2 
 
 
-<p>Desarrollado con ❤️ para aprobar Proyectos 2 :) >Nest</a>.</p>
+## Badges
 
-<p>
-  <a href="tu_enlace_de_circuito_ci" target="_blank">
-    <img src="tu_imagen_de_circuito_ci" alt="Circuito CI">
-  </a>
-  <a href="tu_enlace_de_npm" target="_blank">
-    <img src="tu_imagen_de_npm" alt="Versión de NPM">
-  </a>
-  <a href="tu_enlace_de_npm" target="_blank">
-    <img src="tu_imagen_de_npm" alt="Licencia del Paquete">
-  </a>
-  <a href="tu_enlace_de_npm" target="_blank">
-    <img src="tu_imagen_de_npm" alt="Descargas de NPM">
-  </a>
-</p>
+Add badges from somewhere like: [shields.io](https://shields.io/)
 
-<h2>Descripción</h2>
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-<p>Este repositorio es un punto de partida para construir una aplicación con el framework <a href="https://nestjs.com/" target="_blank">Nest</a>.</p>
 
-<h2>Instalación</h2>
+![Logo](https://miro.medium.com/v2/resize:fit:1400/1*kyEKW8WvT5-eeajWTD3Fvg.png)
 
-<pre>
-  <code>$ yarn install</code>
-</pre>
 
-<h2>Ejecutar la aplicación</h2>
+## contribuidores
 
-<pre>
-  <code>
-    # modo desarrollo
-    $ yarn run start
+- Joseph Christoffer Condori Murga
+- Alvaro Alexandro Tovar Jauregui
+- Kevin Obet Chavez Mendez
 
-    # modo watch
-    $ yarn run start:dev
 
-    # modo producción
-    $ yarn run start:prod
-  </code>
-</pre>
+## Instalación
 
-<h2>Pruebas</h2>
+```http
+  nest new project-name
 
-<pre>
-  <code>
-    # pruebas unitarias
-    $ yarn run test
+```
+#### Nest js
 
-    # pruebas e2e
-    $ yarn run test:e2e
+```http
+  nest g resource cats --no-spec
+  
+  yarn add class-validator class-transformer -SE
+```
 
-    # cobertura de pruebas
-    $ yarn run test:cov
-  </code>
-</pre>
+#### MySql
 
-<h2>Soporte</h2>
+```http
+$ npm install --save @nestjs/typeorm typeorm mysql2
+```
 
-<p>Este proyecto está licenciado bajo MIT. Puede crecer gracias a los patrocinadores y el apoyo de los increíbles seguidores. Si deseas unirte, por favor <a href="https://docs.nestjs.com/support" target="_blank">lee más aquí</a>.</p>
-
-<h2>Mantente en contacto</h2>
-
-<ul>
-  <li>Autor - <a href="https://tu_sitio_web.com" target="_blank">Tu Nombre</a></li>
-  <li>Sitio web - <a href="https://tu_sitio_web.com" target="_blank">https://tu_sitio_web.com/</a></li>
-  <li>Twitter - <a href="https://twitter.com/tu_usuario_de_twitter" target="_blank">@tu_usuario_de_twitter</a></li>
-</ul>
-
-<h2>Licencia</h2>
-
-<p>Este proyecto está licenciado bajo <a href="LICENSE" target="_blank">MIT</a>.</p>

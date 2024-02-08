@@ -29,26 +29,4 @@ export class PerfilService {
       throw new Error('Error al obtener Perfil: '+error.message);
     }
   }
-
-
-
-  create(createPerfilDto: CreatePerfilDto) {
-    return 'This action adds a new perfil';
-  }
-
-  findAll() {
-    return `This action returns all perfil`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} perfil`;
-  }
-
-  update(id: number, updatePerfilDto: UpdatePerfilDto) {
-    return `This action updates a #${id} perfil`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} perfil`;
-  }
 }

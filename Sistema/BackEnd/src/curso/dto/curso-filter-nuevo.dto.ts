@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import {Type } from 'class-transformer';
 import {
     IsInt,
     IsNotEmpty,
@@ -12,16 +12,17 @@ from 'class-validator';
 
 export class CursoFilterNewDto {
 
-    @IsOptional()
-    @IsString({ message: 'La variable input ingresada debe ser de tipo string' })
-    @MaxLength(200, { message: 'El input maximo es de 200 caracteres' })
-    nombre?: string;
+  @IsOptional()
+  @IsString({ message: 'La variable input ingresada debe ser de tipo string' })
+  @MaxLength(200, { message: 'El input maximo es de 200 caracteres' })
+  nombre?: string | null = "" ;
 
-    @IsOptional()
-    @IsString({
-      message: 'La variable categoria ingresada debe ser de tipo string',
-    })
-    categoria?: string;
+  
+  @IsOptional()
+  @IsString({
+    message: 'La variable categoria ingresada debe ser de tipo string',
+  })
+  categoria?: string | null;
 
     @IsInt({ message: 'La pagina debe ser de tipo number' })
     @Type(() => Number)

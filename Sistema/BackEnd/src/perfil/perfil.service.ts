@@ -29,4 +29,23 @@ export class PerfilService {
       throw new Error('Error al obtener Perfil: '+error.message);
     }
   }
+
+  async getmostrardatospersonales(id_usuario:number)
+  {
+    try{
+      const [datosPersonales] = await this.perfilRepository.query(
+        'CALL sp_datos_personales_mostrar(?);',
+        [id_usuario]
+      );
+      return datosPersonales;
+    }
+    catch (error)
+    {
+      console.log(error);
+      throw new Error('Error al obtener Perfil: '+error.message);
+    }
+  }
+
+
+  
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CursoService } from './curso.service';
 import { CursoFilterNewDto } from './dto/curso-filter-nuevo.dto';
 import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -17,7 +17,7 @@ export class CursoController {
     summary: 'Cursos',
     description: 'Esta API permite mostrar los cursos que contiene la plataforma el procedimiento que se utiliza es el siguiente sp_listar_cursos_filtros(?,?)',
   })
-  filtrarcursos(
+ async filtrarcursos(
     @Query() filtrarNuevoDto: CursoFilterNewDto,
   ) {
    try {
@@ -40,7 +40,7 @@ export class CursoController {
     summary: 'Listar Cursos Comprado por Id Estudiante',
     description: 'Esta APi permite Mostrar los cursos que un usuario a adquirido mediante el sp_listar_cursos_comprados(?,?,?)'
   })
-  filtrarcursoscomprados(
+  async filtrarcursoscomprados(
     @Param('idEstudiante') id_usuario: number,
     @Query() filtrarcursoscomprados: CursoFilterNewDto,
   )
@@ -59,6 +59,30 @@ export class CursoController {
       };
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 

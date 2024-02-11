@@ -70,6 +70,46 @@ export class CursoService {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  async comprarcurso (id_usuario:number, id_curso: number){
+    try
+    {
+      await this.cursoRepository.query(
+        'CALL sp_insertar_compra_curso(?,?,@mensaje)',
+        [id_usuario,id_curso]
+      );
+      const [result] = await this.cursoRepository.query(
+        'SELECT @mensaje AS mensaje',
+      );
+
+      const mensajeResultado = result.mensaje;
+      console.log('Mensaje de compra:', mensajeResultado);
+    }
+    catch(error)
+    {throw new Error('Error al comprar curso: '+ error.message)}
+  }
+
+
+
   async listarmodulo (curso: number)
   {
     try{

@@ -1,0 +1,28 @@
+.profile-info {
+  display: inline;
+  margin-right: 2%;
+}
+
+.icon1 {
+  margin-right: 0.8%;
+  justify-content: center;
+  align-items: center;
+  height: 23%;
+  width: 1.5%;
+}
+
+.icon2{
+  margin-right: 0.8%;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  width: 2%;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.selected .icon1, .selected .icon2 {
+  color: #68C2E8;
+}

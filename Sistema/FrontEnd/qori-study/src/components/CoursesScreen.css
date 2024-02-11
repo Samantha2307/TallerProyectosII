@@ -1,0 +1,225 @@
+.courses-screen {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #262626;
+  padding-left: 3%;
+  padding-top: 1%;
+  padding-right: 3%;
+}
+
+.search-container,
+.filters-container {
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
+
+.search-container select {
+  border: 1px solid #000000;
+}
+
+.filters-container {
+  max-width: 100%;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter-item {
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  margin-right: 4%;
+}
+
+.filter-item label {
+  padding: 2.5%;
+  font-size: 90%;
+  margin-right: 5%;
+  text-align: left;
+}
+
+.filter-item select {
+  padding: 1.5%;
+  font-size: 80%;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  color: white;
+  background-color: #1a1a1a;
+}
+
+.filter-item select:focus {
+  outline: none;
+  border-color: transparent;
+  border-radius: 50px;
+  box-shadow: 0 0 2px 1px transparent;
+}
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  grid-gap: 2%;
+}
+
+.course-card {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card__image {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+}
+
+.course-card__image img {
+  width: 100%;
+  height: auto;
+}
+
+.course-card__info {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card__title {
+  color: white;
+  font-size: 106%;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 3%;
+}
+
+.course-card__subtitle {
+  font-size: 70%;
+  color: #676767;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.course-card__button {
+  padding: 3% 9%;
+  background-color: #68C2E8;
+  color: #fff;
+  border-color: #64b8dc;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+.course-card__button:hover {
+  background-color: #64b8dc;
+}
+
+label {
+  color: #68C2E8;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.custom-button {
+  color: #68C2E8;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  &:active {
+    color: #e5e5e5;
+  }
+}
+.course-card__price {
+  width: 100%;
+  font-size: 106%;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+.price-original {
+  margin-right: 5px;
+  color: hsl(0, 0%, 40%);
+  display: flex;
+  align-items: center;
+  font-size: 80%;
+}
+.price-descuento {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-size: 100%;
+}
+
+.pagination-menu {
+  font-size: 85%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-menu span {
+  cursor: pointer;
+  padding: 10px 10px;
+  margin: 0 3px;
+  border-radius: 25px;
+  background-color: #1a1a1a;
+  color: white;
+}
+.pagination-button.single-digit {
+  padding: 10px 15px; 
+}
+
+.pagination-button.double-digit {
+  padding: 10px 10px;
+}
+.pagination-menu span1 {
+  cursor: pointer;
+  padding: 10px 10px;
+  margin: 0 3px;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+}
+
+.pagination-menu span.active {
+  background-color: #68C2E8;
+  color: white;
+  border-radius: 50px;
+}
+
+.progress {
+  color: white;
+  background-color: transparent;
+  margin: 0%;
+  height: auto;
+}
+
+.h2 {
+  display: flex;
+  justify-content:flex-end;
+  text-align: center;
+  color: white;
+  font-size: 120%; 
+}
+.progress-bar-container{
+  width: 100%;
+}
+.progress-bar {
+  height: 20px;
+  background-color: #68C2E8;
+}
+
+.bold-text {
+  margin-left: 5px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  font-size: 110%;
+}

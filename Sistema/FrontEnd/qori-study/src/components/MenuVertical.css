@@ -1,0 +1,85 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+.menu-vertical {
+  background-color: #1a1a1a;
+  color: #fff;
+  width: 16%;
+  padding: 2%;
+  height: 100%;
+  position: fixed;
+  z-index: 0;
+}
+
+.menu-item {
+  font-size: 90%;
+  display: flex;
+  padding: 8%;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-left: 1%;
+}
+
+.menu-item:hover {
+  background-color: #1a1a1a;
+}
+
+.menu-item:hover i {
+  color: #68C2E8;
+}
+
+.menu-item:hover span {
+  color: #68C2E8;
+}
+
+.menu-item-header {
+  display: flex;
+  align-items: center;
+  padding: 5%;
+  background-color: #1a1a1a;
+  color: #68C2E8;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.menu-item i {
+  margin-right: 5%;
+}
+
+.icono-img {
+  width: 38%;
+  height: 38%;
+  margin-right: 5%;
+  transition: margin 0.3s ease;
+}
+
+.icon-size {
+  width: 10%;
+  height: 10%;
+}
+
+.menu-item.active {
+  background-color: #1a1a1a;
+}
+
+.menu-item.active i,
+.menu-item.active span {
+  color: #68C2E8;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 30%) {
+  .menu-vertical {
+    width: 30%;
+  }
+
+  .menu-item {
+    margin-left: 20%;
+  }
+
+  .menu-item i {
+    margin-right: 20%;
+  }
+}

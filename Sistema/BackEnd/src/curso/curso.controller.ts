@@ -61,166 +61,159 @@ export class CursoController {
   }
 
 
+  @Post('registrarcompra/:idUsuario/:idCurso')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  @Get('listarmodulo/:idCurso')
-  @ApiHeader({
-    name: 'api-key',
-    description: 'Contra de API',
-  })
-   @ApiOperation({
-    summary: 'Listar Cursos Comprado por Id Estudiante',
-    description: 'Esta APi permite listar modulos de un curso y para eos se utiliza el sp_listar_modulos_curso(?) '
-   })
-
-  async listarmodulo(
-    @Param('idCurso') curso: number,
-  ){
-    return await this.cursoService.listarmodulo(curso);
-  }
-
-
-
-  @Get('sesionesmodulo/:idModulo/:idCurso')
   @ApiHeader({
     name: 'api-key',
     description: 'Contra de API',
   })
   @ApiOperation({
-    summary: 'Listar Sesiones de un Modulo por ID del Modulo y ID del Curso',
-    description: 'Esta APi Permite Mostrar las Sesiones de un Modulos Mediante el sp_listar_sesion_modulo(?,?)'
+    summary: 'Realizar Compra Curso',
+    description: 'Esta APi permite Registrar una Adquisición de un Curso a un alumno y utiliza el SP sp_insertar_compra_curso(?,?,@mensaje) '
   })
-  listarsesionesmodulo(
-    @Param('idModulo') id_modulo: number,
-    @Param('idCurso') id_curso: number,
-  )
-  {
-    try {
-  
-      return this.cursoService.listarsesionmodulo(
-        id_modulo,
-        id_curso
-      )
-   
-    } catch (error) {
-      return {
-        error: 'No se pudo obtener las sesiones del modulo desde Service',
-        message: error.message,
-      };
+
+  async registrarcompra(
+      @Param('idUsuario') id_usuario: number,
+      @Param('idCurso') id_curso: number,
+    ) {
+      return await this.cursoService.comprarcurso(id_usuario, id_curso);
     }
-  }
 
 
-
-  @Get('detallecurso/:idCurso')
-  @ApiHeader({
-    name: 'api-key',
-    description: 'Contra de API',
-  })
-  @ApiOperation({
-    summary: 'Listar Detalle de un Curso por ID del Curso',
-    description: 'Esta APi Permite Mostrar el Detalle de un Curso Mediante el sp_listar_detalle_curso(?,)'
-  })
-  listardetallecurso(
-    @Param('idCurso') id_curso: number,
-  )
-  {
-    try {
+    @Get('listarmodulo/:idCurso')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+     @ApiOperation({
+      summary: 'Listar Cursos Comprado por Id Estudiante',
+      description: 'Esta APi permite listar modulos de un curso y para eos se utiliza el sp_listar_modulos_curso(?) '
+     })
   
-      return this.cursoService.listardetallecurso(
-        id_curso
-      )
-   
-    } catch (error) {
-      return {
-        error: 'No se pudo obtener el detalle del curso desde Service',
-        message: error.message,
-      };
+    async listarmodulo(
+      @Param('idCurso') curso: number,
+    ){
+      return await this.cursoService.listarmodulo(curso);
     }
-  }
-
-
-
-  @Get('detalleforocurso/:idCurso')
-  @ApiHeader({
-    name: 'api-key',
-    description: 'Contra de API',
-  })
-  @ApiOperation({
-    summary: 'Listar Detalle del Foro de un Curso por ID del Curso',
-    description: 'Esta APi Permite Mostrar el Detalle del Foro de un Curso Mediante el sp_listar_foro_curso(?)'
-  })
-  listardetalleforocurso(
-    @Param('idCurso') id_curso: number,
-  )
-  {
-    try {
   
-      return this.cursoService.listarforocurso(
-        id_curso
-      )
-   
-    } catch (error) {
-      return {
-        error: 'No se pudo obtener el detalle del foro de un curso desde Service',
-        message: error.message,
-      };
-    }
-  }
-
-
-
-
-  @Get('detalleevaluacionmodulo/:idModulo')
-  @ApiHeader({
-    name: 'api-key',
-    description: 'Contra de API',
-  })
-  @ApiOperation({
-    summary: 'Listar Detalle de la Evaluacion de un Modulo por ID del Modulo',
-    description: 'Esta APi Permite Mostrar el Detalle de la Evaluacion de un Modulo Mediante el sp_listar_evaluacion(?)'
-  })
-  listardetalleevaluacionmodulo(
-    @Param('idModulo') id_modulo: number,
-  )
-  {
-    try {
   
-      return this.cursoService.listarevaluacionmodulo(
-        id_modulo
-      )
-   
-    } catch (error) {
-      return {
-        error: 'No se pudo obtener el detalle de la evaluacion de un modulo desde Service',
-        message: error.message,
-      };
+  
+    @Get('sesionesmodulo/:idModulo/:idCurso')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Sesiones de un Modulo por ID del Modulo y ID del Curso',
+      description: 'Esta APi Permite Mostrar las Sesiones de un Modulos Mediante el sp_listar_sesion_modulo(?,?)'
+    })
+    listarsesionesmodulo(
+      @Param('idModulo') id_modulo: number,
+      @Param('idCurso') id_curso: number,
+    )
+    {
+      try {
+    
+        return this.cursoService.listarsesionmodulo(
+          id_modulo,
+          id_curso
+        )
+     
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener las sesiones del modulo desde Service',
+          message: error.message,
+        };
+      }
     }
-  }
+  
+  
+  
+    @Get('detallecurso/:idCurso')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Detalle de un Curso por ID del Curso',
+      description: 'Esta APi Permite Mostrar el Detalle de un Curso Mediante el sp_listar_detalle_curso(?,)'
+    })
+    listardetallecurso(
+      @Param('idCurso') id_curso: number,
+    )
+    {
+      try {
+    
+        return this.cursoService.listardetallecurso(
+          id_curso
+        )
+     
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener el detalle del curso desde Service',
+          message: error.message,
+        };
+      }
+    }
+  
+  
+  
+    @Get('detalleforocurso/:idCurso')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Detalle del Foro de un Curso por ID del Curso',
+      description: 'Esta APi Permite Mostrar el Detalle del Foro de un Curso Mediante el sp_listar_foro_curso(?)'
+    })
+    listardetalleforocurso(
+      @Param('idCurso') id_curso: number,
+    )
+    {
+      try {
+    
+        return this.cursoService.listarforocurso(
+          id_curso
+        )
+     
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener el detalle del foro de un curso desde Service',
+          message: error.message,
+        };
+      }
+    }
+  
+  
+  
+  
+    @Get('detalleevaluacionmodulo/:idModulo')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Detalle de la Evaluacion de un Modulo por ID del Modulo',
+      description: 'Esta APi Permite Mostrar el Detalle de la Evaluacion de un Modulo Mediante el sp_listar_evaluacion(?)'
+    })
+    listardetalleevaluacionmodulo(
+      @Param('idModulo') id_modulo: number,
+    )
+    {
+      try {
+    
+        return this.cursoService.listarevaluacionmodulo(
+          id_modulo
+        )
+     
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener el detalle de la evaluacion de un modulo desde Service',
+          message: error.message,
+        };
+      }
+    } 
 }
-
 
 

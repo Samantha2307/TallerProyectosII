@@ -68,27 +68,6 @@ export class CursoService {
     
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   async comprarcurso (id_usuario:number, id_curso: number){
     try

@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CursoService } from './curso.service';
 import { CursoFilterNewDto } from './dto/curso-filter-nuevo.dto';
-import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('curso')
 @ApiTags('Curso')
@@ -17,10 +17,10 @@ export class CursoController {
     summary: 'Cursos',
     description: 'Esta API permite mostrar los cursos que contiene la plataforma el procedimiento que se utiliza es el siguiente sp_listar_cursos_filtros(?,?)',
   })
- async filtrarcursos(
+async filtrarcursos(
     @Query() filtrarNuevoDto: CursoFilterNewDto,
   ) {
-   try {
+  try {
       return this.cursoService.listarcurso(filtrarNuevoDto);
     } catch (error) {
       return {
@@ -51,7 +51,7 @@ export class CursoController {
         id_usuario,
         filtrarcursoscomprados
       )
- 
+
     } catch (error) {
       return {
         error: 'No se pudo obtener los cursos comprados desde Service',
@@ -85,10 +85,10 @@ export class CursoController {
       name: 'api-key',
       description: 'Contra de API',
     })
-     @ApiOperation({
+    @ApiOperation({
       summary: 'Listar Cursos Comprado por Id Estudiante',
       description: 'Esta APi permite listar modulos de un curso y para eos se utiliza el sp_listar_modulos_curso(?) '
-     })
+    })
   
     async listarmodulo(
       @Param('idCurso') curso: number,
@@ -118,7 +118,7 @@ export class CursoController {
           id_modulo,
           id_curso
         )
-     
+    
       } catch (error) {
         return {
           error: 'No se pudo obtener las sesiones del modulo desde Service',
@@ -147,7 +147,7 @@ export class CursoController {
         return this.cursoService.listardetallecurso(
           id_curso
         )
-     
+    
       } catch (error) {
         return {
           error: 'No se pudo obtener el detalle del curso desde Service',
@@ -176,7 +176,7 @@ export class CursoController {
         return this.cursoService.listarforocurso(
           id_curso
         )
-     
+    
       } catch (error) {
         return {
           error: 'No se pudo obtener el detalle del foro de un curso desde Service',
@@ -206,14 +206,14 @@ export class CursoController {
         return this.cursoService.listarevaluacionmodulo(
           id_modulo
         )
-     
+    
       } catch (error) {
         return {
           error: 'No se pudo obtener el detalle de la evaluacion de un modulo desde Service',
           message: error.message,
         };
       }
-    } 
+    }
 }
 
 

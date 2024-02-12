@@ -62,6 +62,8 @@ export const Profile = () => {
             <ProfileInfo value="902689369" iconSrc1={`${process.env.PUBLIC_URL}/img/tel.png`} />
             <ProfileInfo value="·" />
             <ProfileInfo value="jperezm@gmail.com" iconSrc2={`${process.env.PUBLIC_URL}/img/cor.png`} />
+            <ProfileInfo value="·" />
+            <ProfileInfo value="77698542" iconSrc3={`${process.env.PUBLIC_URL}/img/id-card.png`} />
           </div>
         </div>
         <button class="submit">Cambiar Foto</button>

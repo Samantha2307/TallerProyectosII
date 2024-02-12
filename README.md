@@ -18,7 +18,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 ![Logo](https://miro.medium.com/v2/resize:fit:1400/1*kyEKW8WvT5-eeajWTD3Fvg.png)
 
 
-## contribuidores
+## Contribuidores
 
 - Joseph Christoffer Condori Murga
 - Alvaro Alexandro Tovar Jauregui

@@ -2,33 +2,63 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EvaluacionService } from './evaluacion.service';
 import { CreateEvaluacionDto } from './dto/create-evaluacion.dto';
 import { UpdateEvaluacionDto } from './dto/update-evaluacion.dto';
+import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
+
 
 @Controller('evaluacion')
+@ApiTags('Evaluacion')
 export class EvaluacionController {
   constructor(private readonly evaluacionService: EvaluacionService) {}
 
-  @Post()
-  create(@Body() createEvaluacionDto: CreateEvaluacionDto) {
-    return this.evaluacionService.create(createEvaluacionDto);
-  }
+  @Get('listarPreguntas/:idevaluacion')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar preguntas evaluacion',
+      description: 'Esta APi permite listar preguntas de una evaluacion en base al sp_listar_preguntas_evaluacion(?)'
+    })
+    async listarcursoinscripcion(
+      @Param('idevaluacion') id_evaluacion: number, 
+    )
+    {
+      try {
+        return this.evaluacionService.listarpreguntasevaluacion(
+          id_evaluacion
+        )
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener la lista de preguntas',
+          message: error.message,
+        };
+      }
+    }
 
-  @Get()
-  findAll() {
-    return this.evaluacionService.findAll();
-  }
+    @Get('listarEvalluacion/:idmodulo')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar preguntas evaluacion',
+      description: 'Esta APi permite evaluaciones de un módulo con el sp_listar_evaluacion(?)'
+    })
+    async listarevalacuion(
+      @Param('idmodulo') id_modulo: number, 
+    )
+    {
+      try {
+        return this.evaluacionService.listarevalacuion(
+          id_modulo
+        )
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener la lista de preguntas',
+          message: error.message,
+        };
+      }
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.evaluacionService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEvaluacionDto: UpdateEvaluacionDto) {
-    return this.evaluacionService.update(+id, updateEvaluacionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.evaluacionService.remove(+id);
-  }
+  
 }

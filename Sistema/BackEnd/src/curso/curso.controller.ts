@@ -77,7 +77,36 @@ export class CursoController {
     ) {
       return await this.cursoService.comprarcurso(id_usuario, id_curso);
     }
+
+    @Get('cursoinsribirse/:idCurso/:idEstudiante')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Detalle del Curso para la inscrición',
+      description: 'Esta APi permite Mostrar los detalles de un cursos que un usuario a adquirido mediante el sp_listar_datos_curso_inscripcion(?,?)'
+    })
+    async listarcursoinscripcion(
+      @Param('idCurso') id_curso: number,
+      @Param('idEstudiante') id_usuario: number,   
+    )
+    {
+      try {
+        return this.cursoService.listarcursoinscripcion(
+          id_curso,
+          id_usuario
+        )
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener los cursos comprados desde Service',
+          message: error.message,
+        };
+      }
+    }
   }
+
+
 
 
 

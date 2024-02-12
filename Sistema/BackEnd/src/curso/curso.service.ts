@@ -81,10 +81,32 @@ export class CursoService {
 
       const mensajeResultado = result.mensaje;
       console.log('Mensaje de compra:', mensajeResultado);
+      return result;
     }
     catch(error)
     {throw new Error('Error al comprar curso: '+ error.message)}
   }
 
+  async listarcursoinscripcion (
+    id_curso: number,
+    id_usuario: number)
+  {
+    try{
+      const [cursos] = await this.cursoRepository.query(
+        'Call sp_listar_datos_curso_inscripcion(?,?)',
+        [
+          id_curso,
+          id_usuario,
+        ],
+      );
+      return cursos;
+    }
+    catch(error)
+    {throw new Error('Error al obtener cursos comprados: '+ error.message)}
+    
+  }
+
+
+  
   
 }

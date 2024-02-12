@@ -35,14 +35,14 @@ export class EvaluacionController {
       }
     }
 
-    @Get('listarEvalluacion/:idmodulo')
+    @Get('listarEvaluacion/:idmodulo')
     @ApiHeader({
       name: 'api-key',
       description: 'Contra de API',
     })
     @ApiOperation({
-      summary: 'Listar preguntas evaluacion',
-      description: 'Esta APi permite evaluaciones de un módulo con el sp_listar_evaluacion(?)'
+      summary: 'Listar evaluacion',
+      description: 'Esta APi permite listar evaluaciones de un módulo con el sp_listar_evaluacion(?)'
     })
     async listarevalacuion(
       @Param('idmodulo') id_modulo: number, 
@@ -51,6 +51,33 @@ export class EvaluacionController {
       try {
         return this.evaluacionService.listarevalacuion(
           id_modulo
+        )
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener la lista de preguntas',
+          message: error.message,
+        };
+      }
+    }
+
+    @Get('listarEvaluaciondetalle/:idestudiante/:idevaluacion')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar detaller evaluacion',
+      description: 'Esta APi permite listar el detalle de las evaluaciones de un estudiante con el sp_listar_evaluacion_detalles(?)(?)'
+    })
+    async listarevalacuiondetalle(
+      @Param('idestudiante') id_estudiante: number, 
+      @Param('idevaluacion') id_evaluacion: number, 
+    )
+    {
+      try {
+        return this.evaluacionService.listarevalacuiondetalle(
+          id_estudiante,
+          id_evaluacion
         )
       } catch (error) {
         return {

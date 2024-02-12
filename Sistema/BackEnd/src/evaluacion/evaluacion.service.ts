@@ -44,4 +44,24 @@ export class EvaluacionService {
       throw new Error ('Error al obtener las evaluaciones del modulo : '+error.message);
     }
   }
+
+  async listarevalacuiondetalle(
+    id_estudiante: number,
+    id_evaluacion: number)
+  {
+    try{
+      const [evaluaciones] = await this.evaluacionRepository.query(
+        'CALL sp_listar_evaluacion_detalles(?,?)',
+        [
+          id_estudiante,
+          id_evaluacion
+        ],
+      );
+      return evaluaciones
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las evaluaciones del modulo : '+error.message);
+    }
+  }
 }

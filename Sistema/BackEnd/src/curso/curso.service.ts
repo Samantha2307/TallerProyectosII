@@ -68,6 +68,7 @@ export class CursoService {
     
   }
 
+
   async comprarcurso (id_usuario:number, id_curso: number){
     try
     {
@@ -85,6 +86,95 @@ export class CursoService {
     }
     catch(error)
     {throw new Error('Error al comprar curso: '+ error.message)}
+  }
+
+
+
+  async listarmodulo (curso: number)
+  {
+    try{
+      const [cursos] = await this.cursoRepository.query(
+        'CALL sp_listar_modulos_curso(?)',
+        [curso]
+      );
+      return cursos;
+    }
+    catch(error)
+    {throw new Error('Error al comprar curso: '+ error.message)}
+  }
+  
+
+
+  async listarsesionmodulo (
+    id_modulo: number,
+    id_curso:number)
+  {
+    try{
+      const [modulos] = await this.cursoRepository.query(
+        'Call sp_listar_sesion_modulo(?,?)',
+        [
+          id_modulo,
+          id_curso,
+        ],
+      );
+      return modulos;
+    }
+    catch(error)
+    {throw new Error('Error al obtener las sesiones de un modulo: '+ error.message)}
+  }
+
+
+
+
+  async listardetallecurso (
+    id_curso:number)
+  {
+    try{
+      const [cursos] = await this.cursoRepository.query(
+        'Call sp_listar_detalle_curso(?)',
+        [
+          id_curso,
+        ],
+      );
+      return cursos;
+    }
+    catch(error)
+    {throw new Error('Error al obtener el detalle del curso: '+ error.message)} 
+  }
+
+
+  async listarforocurso(
+    id_curso:number)
+  {
+    try{
+      const [foros] = await this.cursoRepository.query(
+        'Call sp_listar_foro_curso(?)',
+        [
+          id_curso,
+        ],
+      );
+      return foros;
+    }
+    catch(error)
+    {throw new Error('Error al obtener el detalle del foro: '+ error.message)}
+  }
+
+
+
+  async listarevaluacionmodulo(
+    id_modulo:number)
+  {
+    try{
+      const [evaluacion] = await this.cursoRepository.query(
+        'Call sp_listar_evaluacion(?)',
+        [
+          id_modulo,
+        ],
+      );
+      return evaluacion;
+    }
+    catch(error)
+    {throw new Error('Error al obtener el detalle de la evaluación: '+ error.message)}
   }
 
   async listarcursoinscripcion (
@@ -106,7 +196,4 @@ export class CursoService {
     
   }
 
-
-  
-  
 }

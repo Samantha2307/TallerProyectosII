@@ -7,6 +7,9 @@ import MisCursos from './components/MisCursos';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Profile from './components/Profile';
+import BotonFlotante from './components/BotonFlotante';
+import Chat from './components/Chat';
+import './components/BotonFlotante.css';
 
 function App() {
   return (
@@ -16,6 +19,7 @@ function App() {
           <Route path="/" exact component={LoginSignup} />
           <Route path="/home" component={Home} />
         </Switch>
+        <BotonFlotante />
       </div>
     </Router>
   );
@@ -23,9 +27,14 @@ function App() {
 
 function Home() {
   const [selectedOption, setSelectedOption] = useState('Perfil');
+  const [chatAbierto, setChatAbierto] = useState(false);
 
   const handleMenuClick = (option) => {
     setSelectedOption(option);
+  };
+  
+  const toggleChat = () => {
+    setChatAbierto(!chatAbierto);
   };
 
   return (
@@ -40,6 +49,7 @@ function Home() {
         {selectedOption === 'Mis cursos' && <MisCursos />}
       </div>
       <Footer />
+      {chatAbierto && <Chat chatAbierto={chatAbierto} />}
     </>
   );
 }

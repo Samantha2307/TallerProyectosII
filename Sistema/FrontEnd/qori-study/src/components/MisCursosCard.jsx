@@ -10,10 +10,6 @@ const MisCursosCard = ({ course }) => (
       <h3 className="course-card__title">{course.title}</h3>
       <div className="course-card__details">
         <p className="course-card__subtitle">
-          <img src={`${process.env.PUBLIC_URL}/img/rate.png`} alt="Rate" style={{ width: '10px', height: '10px', marginRight: '5px' }} />
-          {course.rate}
-        </p>
-        <p className="course-card__subtitle">
           <img src={`${process.env.PUBLIC_URL}/img/publicacion.png`} alt="Publicacion" style={{ width: '10px', height: '10px', marginRight: '5px' }} />
           {course.publicacion}
         </p>

@@ -19,9 +19,8 @@ const CourseList = () => {
         imageUrl: `${process.env.PUBLIC_URL}/img/cursos.png`,
         price: {
           original: '112.90',
-          discounted: '105.90',
+          discounted: 'GRATUITO',
         },
-        rate: '4.2',
         publicacion: '15-05-2023',
         duracion: '4 semanas',
       };

@@ -1,12 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './MenuVertical.css';
 
 const MenuVertical = ({ onSelect, selectedOption }) => {
   const enlaces = [
-    { titulo: 'Perfil', url: '#', icono: 'fa-user' },
-    { titulo: 'Cursos', url: '#', icono: 'fa-book' },
-    { titulo: 'Mis cursos', url: '#', icono: 'fa-graduation-cap' },
-    { titulo: 'Certificados', url: '#', icono: 'fa-certificate' },
+    { titulo: 'Perfil', url: '/home/perfil', icono: 'fa-user' },
+    { titulo: 'Cursos', url: '/home/cursos', icono: 'fa-book' },
+    { titulo: 'Mis cursos', url: '/home/miscursos', icono: 'fa-graduation-cap' },
+    { titulo: 'Certificados', url: '/home/certificados', icono: 'fa-certificate' },
   ];
 
   const handleMenuClick = (titulo) => {
@@ -15,23 +16,24 @@ const MenuVertical = ({ onSelect, selectedOption }) => {
 
   const renderEnlaces = () => {
     return enlaces.map((enlace, index) => (
-      <button
+      <NavLink
         key={index}
+        to={enlace.url}
         className={`menu-item ${selectedOption === enlace.titulo ? 'active' : ''}`}
         onClick={() => handleMenuClick(enlace.titulo)}
       >
         <i className={`fas ${enlace.icono} icon-size`}></i>
         <span className="texto">{enlace.titulo}</span>
-      </button>
+      </NavLink>
     ));
   };
 
   return (
     <div className="menu-vertical">
-      <button href="#" className="menu-item menu-item-header">
+      <NavLink to="/" className="menu-item menu-item-header">
         <img src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="QoriStudy Logo" className="icono-img" />
         <span className="texto">QoriStudy</span>
-      </button>
+      </NavLink>
       {renderEnlaces()}
     </div>
   );

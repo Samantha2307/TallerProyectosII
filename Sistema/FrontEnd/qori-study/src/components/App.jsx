@@ -10,8 +10,6 @@ import Profile from './components/Profile';
 import BotonFlotante from './components/BotonFlotante';
 import Chat from './components/Chat';
 import './components/BotonFlotante.css';
-import CourseDetail from './components/CourseDetail';
-import VideoCourse from './components/VideoCourse';
 import  Evaluacion from './components/Evaluacion';
 
 function App() {
@@ -21,52 +19,30 @@ function App() {
         <Switch>
           <Route path="/" exact component={LoginSignup} />
           <Route path="/home" component={Home} />
-          <Route path="/home/perfil" component={Profile} />
-          <Route path="/home/cursos" component={CoursesScreen} />
-          <Route path="/home/miscursos" component={MisCursos} />
-          <Route path="/curso" component={Detalle} />
-          <Route path="/course/programacion-basica" component={VideoCourse} />
         </Switch>
         <BotonFlotante />
       </div>
     </Router>
   );
 }
-function Detalle(){
-  const [selectedOption, setSelectedOption] = useState('Cursos');
-
-  const handleMenuClick = (option) => {
-    setSelectedOption(option);
-  };
-  return (
-    <>
-      <MenuVertical onSelect={handleMenuClick} selectedOption={selectedOption} />
-      <div className="content" style={{ marginLeft: '16%' }}>
-        <Header />
-      </div>
-      <div className="content" style={{ marginLeft: '16%' }}>
-        <CourseDetail />
-        {selectedOption === 'Perfil' && <Profile />}
-        {selectedOption === 'Mis cursos' && <MisCursos />}
-      </div>
-      <Footer />
-    </>
-  );
-}
 
 function Home() {
-  const [selectedOption, setSelectedOption] = useState('Perfil');
-  const [chatAbierto] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('Cursos');
+  const [chatAbierto, setChatAbierto] = useState(false);
 
   const handleMenuClick = (option) => {
     setSelectedOption(option);
+  };
+  
+  const toggleChat = () => {
+    setChatAbierto(!chatAbierto);
   };
 
   return (
     <>
       <MenuVertical onSelect={handleMenuClick} selectedOption={selectedOption} />
       <div className="content" style={{ marginLeft: '16%' }}>
-        <Header />
+        {<Header />}
       </div>
       <div className="content" style={{ marginLeft: '16%' }}>
         {selectedOption === 'Perfil' && <Profile />}

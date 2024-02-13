@@ -17,7 +17,6 @@ const MisCursosList = () => {
         subtitle: 'Curso intermedio',
         level: 'Intermedio',
         imageUrl: `${process.env.PUBLIC_URL}/img/cursos.png`,
-        rate: '4.2',
         publicacion: '15-05-2023',
         duracion: '4 semanas',
       };

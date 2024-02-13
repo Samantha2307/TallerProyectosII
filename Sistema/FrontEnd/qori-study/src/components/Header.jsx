@@ -40,9 +40,9 @@ const Header = () => {
           <div className="header__user-menu-items">
             {
             <ul>
-              <li><a href="https://www.web-leb.com/code" onClick={handleOptionClick}>Editar Perfil</a></li>
+              <li><a href="/home/perfil" onClick={handleOptionClick}>Editar Perfil</a></li>
               <hr _ngcontent-ng-c500820843=""/>
-              <li><a href="https://www.web-leb.com/code" onClick={handleOptionClick}>Cerrar Sesión</a></li>
+              <li><a href="/" onClick={handleOptionClick}>Cerrar Sesión</a></li>
             </ul>
             }
           </div>

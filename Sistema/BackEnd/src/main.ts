@@ -20,7 +20,7 @@ async function bootstrap() {
 
     const config = new DocumentBuilder()
     .setTitle('QoriStudy APIS')
-    .setDescription('Y aquí nace las Apis de los cracks de Back no de fron esos nos bajitos ga')
+    .setDescription('Y aquí nace las Apis de los cracks de Back no de Front esos nos bajitos GA!')
     .setVersion('1.0')
     .build();
     

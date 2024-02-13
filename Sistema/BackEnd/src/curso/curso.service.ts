@@ -106,6 +106,32 @@ export class CursoService {
     
   }
 
+  async listardetallecurso(id_curso: number) {
+    try {
+        const [cursos] = await this.cursoRepository.query('Call sp_listar_detalle_curso(?)', [
+            id_curso,
+        ]);
+        return cursos;
+    }
+    catch (error) {
+        throw new Error('Error al obtener el detalle del curso: ' + error.message);
+    }
+  }
+
+  async listarforocurso(id_curso: number) {
+    try {
+        const [foros] = await this.cursoRepository.query('Call sp_listar_foro_curso(?)', [
+            id_curso,
+        ]);
+        return foros;
+    }
+    catch (error) {
+        throw new Error('Error al obtener el detalle del foro: ' + error.message);
+    }
+}
+
+
+
 
   
   

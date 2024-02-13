@@ -10,7 +10,7 @@ import { registrarUsuarioDto } from './dto/registrar-usuario.dto';
 export class SesionController {
   constructor(private readonly sesionService: SesionService) {}
 
-  @Get('registrarUsuario')
+  @Post('registrarUsuario')
   @ApiHeader({
     name: 'api-key',
     description: 'Contra de API',

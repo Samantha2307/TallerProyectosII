@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 650px;
+    height: auto;
   }
   
   .pregunta-container {
@@ -133,6 +133,7 @@
   }
 
   .resultados {
+    display: block;
     background-color: #1a1a1a;
     border-radius: 10px;
     padding: 20px;
@@ -151,7 +152,8 @@
   .resultados h2 span{
     font-size: 30px;
     text-align: center;
-    text-shadow: 3px 3px 10px #ffffffa0;
+    text-shadow: 3px 3px 10px #ffffff7b;
+    color:#68c2e8;
   }
   
   .resultados span {

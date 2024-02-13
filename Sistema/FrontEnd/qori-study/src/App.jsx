@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import BotonFlotante from './components/BotonFlotante';
 import Chat from './components/Chat';
 import './components/BotonFlotante.css';
+import  Evaluacion from './components/Evaluacion';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
 }
 
 function Home() {
-  const [selectedOption, setSelectedOption] = useState('Perfil');
+  const [selectedOption, setSelectedOption] = useState('Cursos');
   const [chatAbierto, setChatAbierto] = useState(false);
 
   const handleMenuClick = (option) => {
@@ -47,6 +48,7 @@ function Home() {
         {selectedOption === 'Perfil' && <Profile />}
         {selectedOption === 'Cursos' && <CoursesScreen />}
         {selectedOption === 'Mis cursos' && <MisCursos />}
+        {selectedOption === 'Certificados' && <Evaluacion />}
       </div>
       <Footer />
       {chatAbierto && <Chat chatAbierto={chatAbierto} />}

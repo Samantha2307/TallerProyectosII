@@ -98,8 +98,8 @@ export const Profile = () => {
             <div className='left'>
               <div>
                 <div className='text'>Fecha de Nacimiento</div>
-                <input className='datos-container' type="date" defaultValue="2012-04-05" />
-              </div>
+                <div className='text'style={{ fontSize: '90%', fontWeight: 'bold', marginLeft: '10%'}}>2012-04-05</div>
+                </div>
               <div>
                 <div className='text'>Número de Celular</div>
                 <input className='datos-container' type="phone" defaultValue="902689369" />

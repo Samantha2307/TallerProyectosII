@@ -118,17 +118,41 @@ export class CursoService {
     }
   }
 
-  async listarforocurso(id_curso: number) {
-    try {
-        const [foros] = await this.cursoRepository.query('Call sp_listar_foro_curso(?)', [
-            id_curso,
-        ]);
-        return foros;
+  async listarforocurso(
+    usuario_id: number,
+    id_curso:number)
+  {
+    try{
+      const [foros] = await this.cursoRepository.query(
+        'Call sp_listar_foro_curso(?,?)',
+        [
+          usuario_id,
+          id_curso,
+        ],
+      );
+      return foros;
     }
-    catch (error) {
-        throw new Error('Error al obtener el detalle del foro: ' + error.message);
+    catch(error)
+    {throw new Error('Error al obtener las preguntas del foro: '+ error.message)}
+  }
+
+  async listarrespuestaforocurso(
+    id_foro_pregunta:number)
+  {
+    try{
+      const [foros] = await this.cursoRepository.query(
+        'Call sp_listar_foro_respuestas(?)',
+        [
+          id_foro_pregunta,
+        ],
+      );
+      return foros;
     }
-}
+    catch(error)
+    {throw new Error('Error al obtener las respuestas de las preguntas del foro: '+ error.message)}
+  }
+
+  
 
 
 

@@ -4,6 +4,7 @@ import { UpdateEvaluacionDto } from './dto/update-evaluacion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { evaluacion } from './entities/evaluacion.entity';
 import { Repository } from 'typeorm';
+import { EvaluacionDto } from './dto/evaluaciondto.dto';
 
 @Injectable()
 export class EvaluacionService {
@@ -64,4 +65,41 @@ export class EvaluacionService {
       throw new Error ('Error al obtener las evaluaciones del modulo : '+error.message);
     }
   }
+
+  async listarpreguntasevaluacionestudiante(
+
+    id_evaluacion: number,
+    id_estudiante: number,
+    evaluaciondto: EvaluacionDto,
+  )
+  {
+    try{
+      const startIndex = (evaluaciondto.page - 1) * evaluaciondto.sizePage;
+      const [evaluacion] = await this.evaluacionRepository.query(
+        'CALL sp_listar_preguntas_evaluacion_estudiante(?,?)',
+        [
+          id_evaluacion,
+          id_estudiante,
+        ],
+      );
+      
+      const evaluacionPaginados = evaluacion.slice(
+        startIndex,
+        startIndex + evaluaciondto.sizePage,
+      );
+      const totalevaluacion = evaluacion.length;
+      return { totalevaluacion, cursos: evaluacionPaginados };
+
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener cursos: '+error.message);
+    }
+
+
+  }
+
+
+
+
 }

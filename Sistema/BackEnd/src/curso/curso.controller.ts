@@ -132,28 +132,57 @@ export class CursoController {
       }
     }
 
-    @Get('detalleforocurso/:idCurso')
+    @Get('listarforo/:idUsuario/:idCurso')
     @ApiHeader({
       name: 'api-key',
       description: 'Contra de API',
     })
     @ApiOperation({
       summary: 'Listar Detalle del Foro de un Curso por ID del Curso',
-      description: 'Esta APi Permite Mostrar el Detalle del Foro de un Curso Mediante el sp_listar_foro_curso(?)'
+      description: 'Esta APi Permite Mostrar el Detalle del Foro de un Curso Mediante el sp_listar_foro_curso(?,?)'
     })
     listardetalleforocurso(
+      @Param('idUsuario') usuario_id: number,
       @Param('idCurso') id_curso: number,
     )
     {
       try {
     
         return this.cursoService.listarforocurso(
+          usuario_id,
           id_curso
         )
     
       } catch (error) {
         return {
-          error: 'No se pudo obtener el detalle del foro de un curso desde Service',
+          error: 'No se pudo obtener el detalle de las preguntas del foro de un curso desde Service',
+          message: error.message,
+        };
+      }
+    }
+    
+    @Get('detallerespuestaforocurso/:idForoPregunta')
+    @ApiHeader({
+      name: 'api-key',
+      description: 'Contra de API',
+    })
+    @ApiOperation({
+      summary: 'Listar Detalle de las Respuestas del Foro de un Curso por ID del Foro Pregunta',
+      description: 'Esta APi Permite Mostrar el Detalle de las Repuestas del Foro Mediante el sp_listar_foro_respuestas(?)'
+    })
+    listardetallerespuestaforocurso(
+      @Param('idForoPregunta') id_foro_pregunta: number,
+    )
+    {
+      try {
+    
+        return this.cursoService.listarrespuestaforocurso(
+          id_foro_pregunta,
+        )
+    
+      } catch (error) {
+        return {
+          error: 'No se pudo obtener el detalle de las respuestas de las preguntas del foro de un curso desde Service',
           message: error.message,
         };
       }

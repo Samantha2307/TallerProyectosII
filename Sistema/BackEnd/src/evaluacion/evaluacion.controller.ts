@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { EvaluacionService } from './evaluacion.service';
 import { CreateEvaluacionDto } from './dto/create-evaluacion.dto';
 import { UpdateEvaluacionDto } from './dto/update-evaluacion.dto';
 import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { EvaluacionDto } from './dto/evaluaciondto.dto';
 
 
 @Controller('evaluacion')
@@ -86,6 +87,33 @@ export class EvaluacionController {
         };
       }
     }
+
+  @Get('listarpreguntaevaluacionestudiante/:idEvaluacion/:idEstudiante')
+  @ApiHeader({
+    name: 'api-key',
+    description: 'Contra de API',
+  })
+  @ApiOperation({
+    summary: 'listar pregunta evaluacion estudiantes',
+    description: 'Esta API permite permite listar las preguntas de los estudiantes con el  sp_listar_preguntas_evaluacion_estudiante(?,?)',
+  })
+ async filtrarcursos(
+    @Param('idEvaluacion')id_evaluacion: number,
+    @Param('idEstudiante')id_estudiante: number,
+    @Query() evaluaciondto: EvaluacionDto,
+  ) {
+   try {
+      return this.evaluacionService.listarpreguntasevaluacionestudiante(
+        id_evaluacion,
+        id_estudiante,
+        evaluaciondto,);
+    } catch (error) {
+      return {
+        error: 'No se pudo obtener la reseña del curso desde Service',
+        message: error.message,
+      };
+    }
+  }
 
   
 }

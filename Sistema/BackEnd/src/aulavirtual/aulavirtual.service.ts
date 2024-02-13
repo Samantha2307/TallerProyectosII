@@ -1,26 +1,58 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAulavirtualDto } from './dto/create-aulavirtual.dto';
 import { UpdateAulavirtualDto } from './dto/update-aulavirtual.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { aulavirtual } from './entities/aulavirtual.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AulavirtualService {
-  create(createAulavirtualDto: CreateAulavirtualDto) {
-    return 'This action adds a new aulavirtual';
+
+  constructor(
+    @InjectRepository(aulavirtual)
+    private aulavirtualRepository: Repository<aulavirtual>,
+  ){}
+
+  async listarmodulo(idcurso: number) {
+    try {
+        const [modulo] = await this.aulavirtualRepository.query(
+          'CALL sp_listar_modulos_curso(?)', [idcurso]);
+        return modulo;
+    }
+    catch (error) {
+        throw new Error('Error al comprar curso: ' + error.message);
+    }
   }
 
-  findAll() {
-    return `This action returns all aulavirtual`;
+  async listarsesionmodulo(id_modulo: number, id_curso: number) {
+    try {
+        const [sesion] = await this.aulavirtualRepository.query(
+          'Call sp_listar_sesion_modulo(?,?)', [
+            id_modulo,
+            id_curso,
+        ]);
+        return sesion;
+    }
+    catch (error) {
+        throw new Error('Error al obtener las sesiones de un modulo: ' + error.message);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} aulavirtual`;
+  async listarevaluacionmodulo(id_modulo: number) {
+    try {
+        const [evaluacion] = await this.aulavirtualRepository.query('Call sp_listar_evaluacion(?)', [
+            id_modulo,
+        ]);
+        return evaluacion;
+    }
+    catch (error) {
+        throw new Error('Error al obtener el detalle de la evaluación: ' + error.message);
+    }
   }
 
-  update(id: number, updateAulavirtualDto: UpdateAulavirtualDto) {
-    return `This action updates a #${id} aulavirtual`;
-  }
+  
 
-  remove(id: number) {
-    return `This action removes a #${id} aulavirtual`;
-  }
+
+
+  
 }

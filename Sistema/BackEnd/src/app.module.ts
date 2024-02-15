@@ -5,6 +5,7 @@ import { CursoModule } from './curso/curso.module';
 import { EvaluacionModule } from './evaluacion/evaluacion.module';
 import { SesionModule } from './sesion/sesion.module';
 import { AulavirtualModule } from './aulavirtual/aulavirtual.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ 
@@ -24,6 +25,7 @@ import { AulavirtualModule } from './aulavirtual/aulavirtual.module';
     EvaluacionModule,
     SesionModule,
     AulavirtualModule,
+    AuthModule,
    ],
   controllers: [],
   providers: [],

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { sesion } from './entities/sesion.entity';
 import { Repository } from 'typeorm';
 import { registrarUsuarioDto } from './dto/registrar-usuario.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class SesionService {
@@ -12,10 +13,17 @@ export class SesionService {
     @InjectRepository(sesion)
     private sesionRepository: Repository<sesion>,
   ){}
+
+  findOneByEmail(email: string)
+  {
+    return this.sesionRepository.findOneBy({email})
+  }
     
   async registarusuario(sesionregistrarDto: registrarUsuarioDto)
   {
     try{
+
+      const hashedPassword = await bcrypt.hash(sesionregistrarDto.password, 10);
     
       await this.sesionRepository.query(
         'CALL sp_regitrar_usuario(?,?,?,?,?,?,?)',
@@ -23,7 +31,7 @@ export class SesionService {
           sesionregistrarDto.nombres,
           sesionregistrarDto.apellidos,
           sesionregistrarDto.correo,
-          sesionregistrarDto.password,
+          hashedPassword,
           sesionregistrarDto.genero,
           sesionregistrarDto.fecha_nacimiento,
           sesionregistrarDto.numero, 

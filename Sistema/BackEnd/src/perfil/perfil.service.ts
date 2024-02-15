@@ -4,6 +4,7 @@ import { UpdatePerfilDto } from './dto/update-perfil.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { perfil } from './entities/perfil.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class PerfilService {
@@ -49,9 +50,11 @@ export class PerfilService {
   async getactualizarcontraseña(password:string, id_usuario:number)
   {
     try{
+
+        const hashedPassword = await bcrypt.hash(password, 10);
         const [actualizarPassword] = await this.perfilRepository.query(
         'CALL sp_actualizar_contraseña(?,?);',
-        [password, id_usuario]
+        [hashedPassword, id_usuario]
       );
       return actualizarPassword;
     }
@@ -61,6 +64,8 @@ export class PerfilService {
       throw new Error('Error al obtener Perfil: '+error.message);
     }
   }
+
+
   async getactualizardatospersonales(numero:number, pais:string, id_usuario:number)
   {
     try{

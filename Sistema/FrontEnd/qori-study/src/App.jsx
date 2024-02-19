@@ -24,7 +24,7 @@ function App() {
           <Route path="/home/perfil" component={Profile} />
           <Route path="/home/cursos" component={CoursesScreen} />
           <Route path="/home/miscursos" component={MisCursos} />
-          <Route path="/curso" component={Detalle} />
+          <Route path="/curso/:idCurso" component={Detalle} />
           <Route path="/course/programacion-basica" component={VideoCourse} />
         </Switch>
         <BotonFlotante />

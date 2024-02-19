@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { http } from '../config/axios.config';
 import CourseCard from './CourseCard';
 import PaginationMenu from './PaginationMenu';
 
 const CourseList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-  const totalItems = 104; // Puedes ajustar la cantidad de elementos que deseas mostrar
+  const totalItems = 5; // Puedes ajustar la cantidad de elementos que deseas mostrar
+
+  const [cursos, setCursos] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await http(`/curso/listadocurso?page=1&sizePage=${totalItems}`);
+      setCursos(data.cursos);
+      console.log(data.cursos);
+    })();
+  }, []);
 
   function generateCourseData(startId, endId) {
     return Array.from({ length: endId - startId + 1 }, (_, index) => {
@@ -29,7 +40,10 @@ const CourseList = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCourses = generateCourseData(indexOfFirstItem + 1, Math.min(indexOfLastItem, totalItems));
+  const currentCourses = generateCourseData(
+    indexOfFirstItem + 1,
+    Math.min(indexOfLastItem, totalItems)
+  );
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -40,12 +54,16 @@ const CourseList = () => {
   return (
     <div className="course-list-container">
       <div className="course-list">
-        {currentCourses.map((course) => (
+        {cursos.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
       </div>
       <div className="pagination-menu">
-        <PaginationMenu totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+        <PaginationMenu
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

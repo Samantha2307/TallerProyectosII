@@ -50,13 +50,13 @@ export const Profile = () => {
     <>
       <div className='container'>
         <div className='text-profile'>Mi Perfil</div>
-        <div class="container-datos">
+        <div className="container-datos">
           <img
             src={`${process.env.PUBLIC_URL}/img/perfil1.png`}
             className="imagen-circular"
             alt="Imagen Circular"
           />
-          <div class='datos'>
+          <div className='datos'>
             <ProfileInfo value="Juan Pérez Melgar" />
             <ProfileInfo value="·" />
             <ProfileInfo value="902689369" iconSrc1={`${process.env.PUBLIC_URL}/img/tel.png`} />
@@ -66,8 +66,8 @@ export const Profile = () => {
             <ProfileInfo value="77698542" iconSrc3={`${process.env.PUBLIC_URL}/img/id-card.png`} />
           </div>
         </div>
-        <button class="submit">Cambiar Foto</button>
-        <div class="options">
+        <button className="submit">Cambiar Foto</button>
+        <div className="options">
           <div
            className={`option ${selectedOption === 'Datos Personales' ? 'selected' : ''}`}
            onClick={() => handleOptionClick('Datos Personales')}
@@ -138,7 +138,7 @@ export const Profile = () => {
                   </>
         )}
         </div>
-        <button class="submit1">Actualizar Datos</button>
+        <button className="submit1">Actualizar Datos</button>
       </div>
     </>
   )

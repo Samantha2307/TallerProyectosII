@@ -1,0 +1,40 @@
+{
+  "totalCursos": 5,
+  "cursos": [
+    {
+      "id_curso": 1,
+      "curso_imagen": "https://edteam-media.s3.amazonaws.com/blogs/original/c2f3e834-b230-4d1a-9642-ab7fcb316e6b.png",
+      "curso_nombre": "Progrmación Orientada a Objetos",
+      "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
+      "curso_duracion": 145
+    },
+    {
+      "id_curso": 2,
+      "curso_imagen": "https://media.licdn.com/dms/image/C4D12AQEN4p05Hl1hSA/article-cover_image-shrink_600_2000/0/1601917348141?e=2147483647&v=beta&t=UvCzp6cASTB-m8isLNNbpuFToqzroLBVBceV9kJPTrE",
+      "curso_nombre": "Estadísticas y Probabilidades",
+      "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
+      "curso_duracion": 125
+    },
+    {
+      "id_curso": 3,
+      "curso_imagen": "https://cdn.goconqr.com/uploads/media/image/15646594/desktop_8359a69d-03b4-4b35-b955-c68adbb51bcb.jpg",
+      "curso_nombre": "Introducción a las Ciencias Naturales",
+      "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
+      "curso_duracion": 168
+    },
+    {
+      "id_curso": 4,
+      "curso_imagen": "https://i.ytimg.com/vi/o-cjoX201mg/maxresdefault.jpg",
+      "curso_nombre": "Teoría Musical",
+      "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
+      "curso_duracion": 187
+    },
+    {
+      "id_curso": 5,
+      "curso_imagen": "https://sarahcentrodeidiomas.com/wp-content/uploads/2021/05/CURSO-DE-INGLES-B2-INTERMEDIO.png",
+      "curso_nombre": "Inglés Intermedio",
+      "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
+      "curso_duracion": 255
+    }
+  ]
+}

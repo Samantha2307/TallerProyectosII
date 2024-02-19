@@ -1,1 +1,1 @@
-export class Aulavirtual {}
+export class aulavirtual {}

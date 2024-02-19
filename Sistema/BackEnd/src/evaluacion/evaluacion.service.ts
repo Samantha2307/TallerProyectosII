@@ -1,26 +1,105 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEvaluacionDto } from './dto/create-evaluacion.dto';
 import { UpdateEvaluacionDto } from './dto/update-evaluacion.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { evaluacion } from './entities/evaluacion.entity';
+import { Repository } from 'typeorm';
+import { EvaluacionDto } from './dto/evaluaciondto.dto';
 
 @Injectable()
 export class EvaluacionService {
-  create(createEvaluacionDto: CreateEvaluacionDto) {
-    return 'This action adds a new evaluacion';
+  constructor(
+    @InjectRepository(evaluacion)
+    private evaluacionRepository: Repository<evaluacion>,
+  ){}
+  async listarpreguntasevaluacion(id_evaluacion: number)
+  {
+    try{
+      const [evaluaciones] = await this.evaluacionRepository.query(
+        'CALL sp_listar_preguntas_evaluacion(?)',
+        [
+          id_evaluacion
+        ],
+      );
+      return evaluaciones
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las preguntas de la evaluacion: '+error.message);
+    }
   }
 
-  findAll() {
-    return `This action returns all evaluacion`;
+  async listarevalacuion(id_modulo: number)
+  {
+    try{
+      const [evaluaciones] = await this.evaluacionRepository.query(
+        'CALL sp_listar_evaluacion(?)',
+        [
+          id_modulo
+        ],
+      );
+      return evaluaciones
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las evaluaciones del modulo : '+error.message);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} evaluacion`;
+  async listarevalacuiondetalle(
+    id_estudiante: number,
+    id_evaluacion: number)
+  {
+    try{
+      const [evaluaciones] = await this.evaluacionRepository.query(
+        'CALL sp_listar_evaluacion_detalles(?,?)',
+        [
+          id_estudiante,
+          id_evaluacion
+        ],
+      );
+      return evaluaciones
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las evaluaciones del modulo : '+error.message);
+    }
   }
 
-  update(id: number, updateEvaluacionDto: UpdateEvaluacionDto) {
-    return `This action updates a #${id} evaluacion`;
+  async listarpreguntasevaluacionestudiante(
+
+    id_evaluacion: number,
+    id_estudiante: number,
+    evaluaciondto: EvaluacionDto,
+  )
+  {
+    try{
+      const startIndex = (evaluaciondto.page - 1) * evaluaciondto.sizePage;
+      const [evaluacion] = await this.evaluacionRepository.query(
+        'CALL sp_listar_preguntas_evaluacion_estudiante(?,?)',
+        [
+          id_evaluacion,
+          id_estudiante,
+        ],
+      );
+      
+      const evaluacionPaginados = evaluacion.slice(
+        startIndex,
+        startIndex + evaluaciondto.sizePage,
+      );
+      const totalevaluacion = evaluacion.length;
+      return { totalevaluacion, cursos: evaluacionPaginados };
+
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener cursos: '+error.message);
+    }
+
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} evaluacion`;
-  }
+
+
+
 }

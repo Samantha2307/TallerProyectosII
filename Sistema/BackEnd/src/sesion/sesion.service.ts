@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSesionDto } from './dto/create-sesion.dto';
 import { UpdateSesionDto } from './dto/update-sesion.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { sesion } from './entities/sesion.entity';
+import { Repository } from 'typeorm';
+import { registrarUsuarioDto } from './dto/registrar-usuario.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class SesionService {
-  create(createSesionDto: CreateSesionDto) {
-    return 'This action adds a new sesion';
+  constructor(
+    @InjectRepository(sesion)
+    private sesionRepository: Repository<sesion>,
+  ){}
+
+  findOneByEmail(email: string)
+  {
+    return this.sesionRepository.findOneBy({email})
+  }
+    
+  async registarusuario(sesionregistrarDto: registrarUsuarioDto)
+  {
+    try{
+
+      const hashedPassword = await bcrypt.hash(sesionregistrarDto.password, 10);
+    
+      await this.sesionRepository.query(
+        'CALL sp_regitrar_usuario(?,?,?,?,?,?,?)',
+        [
+          sesionregistrarDto.nombres,
+          sesionregistrarDto.apellidos,
+          sesionregistrarDto.correo,
+          hashedPassword,
+          sesionregistrarDto.genero,
+          sesionregistrarDto.fecha_nacimiento,
+          sesionregistrarDto.numero, 
+        ],
+      );
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener cursos: '+error.message);
+    }
   }
 
-  findAll() {
-    return `This action returns all sesion`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sesion`;
-  }
-
-  update(id: number, updateSesionDto: UpdateSesionDto) {
-    return `This action updates a #${id} sesion`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} sesion`;
-  }
 }

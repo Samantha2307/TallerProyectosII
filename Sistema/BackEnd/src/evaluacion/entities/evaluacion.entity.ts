@@ -1,1 +1,1 @@
-export class Evaluacion {}
+export class evaluacion {}

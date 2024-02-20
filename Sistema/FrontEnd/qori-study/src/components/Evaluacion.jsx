@@ -1,120 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Evaluacion.css";
 
 const Evaluacion = () => {
-const curso = "NodeJS Nivel Avanzado"
-const puntaje = "96.00/100.00"
-const certificado = "Certificado obtenido"
-  const preguntas = [
-    {
-      id: 1,
-      pregunta: "¿TCP es más rápido que UDP?",
-      respuestas: [
-        "TCP garantiza la entrega de datos, mientras que UDP no",
-        "UDP se utiliza exclusivamente para navegadores web",
-        "TCP es más rápido que UDP"
-      ],
-      respuestaCorrecta: "TCP es más rápido que UDP"
-    },
-    {
-      id: 2,
-      pregunta: "¿TCP es más rápido que UDP?2",
-      respuestas: [
-        "TCP garantiza la entrega de datos, mientras que UDP no2",
-        "UDP se utiliza exclusivamente para navegadores web2",
-        "TCP es más rápido que UDP2"
-      ],
-      respuestaCorrecta: "TCP es más rápido que UDP2"
-    },
-    {
-      id: 3,
-      pregunta: "¿TCP es más rápido que UDP?3",
-      respuestas: [
-        "TCP garantiza la entrega de datos, mientras que UDP no3",
-        "UDP se utiliza exclusivamente para navegadores web3",
-        "TCP es más rápido que UDP3"
-      ],
-      respuestaCorrecta: "TCP es más rápido que UDP3"
-    },
-    {
-        id: 4,
-        pregunta: "¿TCP es más rápido que UDP?4",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no4",
-          "UDP se utiliza exclusivamente para navegadores web4",
-          "TCP es más rápido que UDP4"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP4"
-      },
-      {
-        id: 5,
-        pregunta: "¿TCP es más rápido que UDP?5",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no5",
-          "UDP se utiliza exclusivamente para navegadores web5",
-          "TCP es más rápido que UDP5"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP5"
-      },
-      {
-        id: 6,
-        pregunta: "¿TCP es más rápido que UDP?6",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no6",
-          "UDP se utiliza exclusivamente para navegadores web6",
-          "TCP es más rápido que UDP6"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP6"
-      },
-      {
-        id: 7,
-        pregunta: "¿TCP es más rápido que UDP?7",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no7",
-          "UDP se utiliza exclusivamente para navegadores web7",
-          "TCP es más rápido que UDP7"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP7"
-      },
-      {
-        id: 8,
-        pregunta: "¿TCP es más rápido que UDP?8",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no8",
-          "UDP se utiliza exclusivamente para navegadores web8",
-          "TCP es más rápido que UDP8"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP8"
-      },
-      {
-        id: 9,
-        pregunta: "¿TCP es más rápido que UDP?9",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no9",
-          "UDP se utiliza exclusivamente para navegadores web9",
-          "TCP es más rápido que UDP9"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP9"
-      },
-      {
-        id: 10,
-        pregunta: "¿TCP es más rápido que UDP?10",
-        respuestas: [
-          "TCP garantiza la entrega de datos, mientras que UDP no10",
-          "UDP se utiliza exclusivamente para navegadores web10",
-          "TCP es más rápido que UDP10"
-        ],
-        respuestaCorrecta: "TCP es más rápido que UDP10"
-      },
-  ];
+  const curso = "NodeJS Nivel Avanzado";
+  const puntaje = "96.00/100.00";
+  const certificado = "Certificado obtenido";
+  const idevaluacion = "1";
 
+  const [preguntas, setPreguntas] = useState([]);
+  const [alternativas, setAlternativas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [respuestasUsuario, setRespuestasUsuario] = useState(new Array(preguntas.length).fill(null));
   const [mostrarAdvertencia, setMostrarAdvertencia] = useState(false);
   const [mostrarResultados, setMostrarResultados] = useState(false);
 
+  useEffect(() => {
+    fetch(`http://localhost:4000/api/v1/evaluacion/listarPreguntas/${idevaluacion}`)
+      .then(response => response.json())
+      .then(data => setPreguntas(data))
+      .catch(error => console.error("Error fetching preguntas:", error));
+  }, []);
+
+  useEffect(() => {
+    if (preguntas.length > 0) {
+      fetch(`http://localhost:4000/api/v1/evaluacion/listarAlternativas/${preguntas[preguntaActual].id_pregunta_evaluacion}`)
+        .then(response => response.json())
+        .then(data => setAlternativas(data))
+        .catch(error => console.error("Error fetching alternativas:", error));
+    }
+  }, [preguntaActual, preguntas]);
+
   const mostrarPregunta = () => {
     const pregunta = preguntas[preguntaActual];
+    if (!pregunta) return null; // Si no hay pregunta, retorna null o algún otro valor predeterminado
+  
     return (
       <div className="pregunta">
         <div className="encabezado-cuestionario">
@@ -126,19 +45,19 @@ const certificado = "Certificado obtenido"
           </div>
         </div>
         <div className="pregunta-container">
-          <p className="pregunta-text">{pregunta.pregunta}</p>
+          <p className="pregunta-text">{pregunta.pregunta_evaluacion_descripcion}</p>
           <form>
-            {pregunta.respuestas.map((respuesta, index) => (
+            {alternativas.map((alternativa, index) => (
               <div key={index}>
                 <input
                   type="radio"
                   id={`respuesta${index}`}
                   name="respuesta"
-                  value={respuesta}
-                  checked={respuestasUsuario[preguntaActual] === respuesta}
-                  onChange={() => handleSeleccionRespuesta(index)}
+                  value={alternativa.alternativa_descripcion}
+                  checked={respuestasUsuario[preguntaActual] === alternativa.alternativa_descripcion}
+                  onChange={() => handleSeleccionRespuesta(alternativa.alternativa_descripcion)}
                 />
-                <label htmlFor={`respuesta${index}`}>{respuesta}</label>
+                <label htmlFor={`respuesta${index}`}>{alternativa.alternativa_descripcion}</label>
               </div>
             ))}
           </form>
@@ -147,22 +66,18 @@ const certificado = "Certificado obtenido"
     );
   };
 
-  const handleSeleccionRespuesta = (index) => {
+  const handleSeleccionRespuesta = (respuesta) => {
     const nuevasRespuestas = [...respuestasUsuario];
-    nuevasRespuestas[preguntaActual] = preguntas[preguntaActual].respuestas[index];
+    nuevasRespuestas[preguntaActual] = respuesta;
     setRespuestasUsuario(nuevasRespuestas);
   };
 
   const siguientePregunta = () => {
-    setPreguntaActual((prevPregunta) =>
-      prevPregunta < preguntas.length - 1 ? prevPregunta + 1 : prevPregunta
-    );
+    setPreguntaActual(prevPregunta => prevPregunta < preguntas.length - 1 ? prevPregunta + 1 : prevPregunta);
   };
 
   const anteriorPregunta = () => {
-    setPreguntaActual((prevPregunta) =>
-      prevPregunta > 0 ? prevPregunta - 1 : prevPregunta
-    );
+    setPreguntaActual(prevPregunta => prevPregunta > 0 ? prevPregunta - 1 : prevPregunta);
   };
 
   const finalizarEvaluacion = () => {
@@ -205,24 +120,20 @@ const certificado = "Certificado obtenido"
         <div className="botones-container">
           {!mostrarResultados && (
             <div className="botones">
-              <button onClick={anteriorPregunta} disabled={preguntaActual === 0}>
-                Anterior
-              </button>
-              <button onClick={siguientePregunta} disabled={preguntaActual === preguntas.length - 1}>
-                Siguiente
-              </button>
+              <button onClick={anteriorPregunta} disabled={preguntaActual === 0}>Anterior</button>
+              <button onClick={siguientePregunta} disabled={preguntaActual === preguntas.length - 1}>Siguiente</button>
             </div>
           )}
           {!mostrarResultados && (
-          <button onClick={finalizarEvaluacion} disabled={preguntaActual !== preguntas.length - 1 || mostrarResultados}>
-            Finalizar evaluación
-          </button>
+            <button onClick={finalizarEvaluacion} disabled={preguntaActual !== preguntas.length - 1 || mostrarResultados}>
+              Finalizar evaluación
+            </button>
           )}
         </div>
         {mostrarAdvertencia && (
           <div className="modal">
             <div className="modal-contenido">
-              <p1>¿Está seguro de finalizar la evaluación?</p1>
+              <p>¿Está seguro de finalizar la evaluación?</p>
               <div className="modal-botones">
                 <button onClick={continuarFinalizacion}>Continuar</button>
                 <button onClick={cancelarFinalizacion}>Cancelar</button>

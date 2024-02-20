@@ -91,7 +91,7 @@
   }
   
   .modal {
-    color: #090909;
+    color:#68C2E8;
     position: fixed;
     top: 0;
     left: 0;
@@ -109,6 +109,11 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-contenido p{
+    color: #68c2e8;
+    font-size: bold;
   }
   
   .modal-botones {
@@ -202,5 +207,68 @@ p1{
     background-color: #090909;
   }
   
+  /* Estilos para la vista de los cursos */
+
   
+  .cursos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+  }
+  
+  .curso-item {
+    width: calc(33% - 40px); 
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #3a4f63;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    max-width: 300px; 
+  }
+  
+  
+  .curso-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .curso-imagen {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .curso-info {
+    margin-top: 20px;
+  }
+  
+  .curso-nombre {
+    font-size: 20px;
+    font-weight: bold;
+    color: #272728;
+  }
+  
+  .curso-fecha, .curso-duracion {
+    font-size: 14px;
+    color: #cfd0d4;
+  }
+  
+  .lista-modulos {
+    margin-top: 20px;
+  }
+  
+  .modulo-item {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #dd1111;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modulo-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+
   

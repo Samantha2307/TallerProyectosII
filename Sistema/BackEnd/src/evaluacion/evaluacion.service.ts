@@ -76,18 +76,16 @@ export class EvaluacionService {
     try{
       const startIndex = (evaluaciondto.page - 1) * evaluaciondto.sizePage;
       const [evaluacion] = await this.evaluacionRepository.query(
-        'CALL sp_listar_preguntas_evaluacion_estudiante(?,?)',
-        [
-          id_evaluacion,
-          id_estudiante,
-        ],
+        'CALL sp_listar_preguntas_evaluacion_estudiante(?, ?)',
+        [id_evaluacion, id_estudiante],
       );
-      
+
       const evaluacionPaginados = evaluacion.slice(
         startIndex,
         startIndex + evaluaciondto.sizePage,
       );
       const totalevaluacion = evaluacion.length;
+
       return { totalevaluacion, cursos: evaluacionPaginados };
 
     }
@@ -117,7 +115,49 @@ export class EvaluacionService {
     }
   }
 
+  async registrar_respuesta(
+    id_detalle_evaluacion: number,
+    id_evaluacion: number,
+    id_pregunta: number,
+    id_alternativa: number,
+    )
+  {
+    try{
+      await this.evaluacionRepository.query(
+        'CALL sp_registrar_respuesta_estudiante(?,?,?,?)',
+        [
+          id_detalle_evaluacion,
+          id_evaluacion,
+          id_pregunta,
+          id_alternativa,
+        ],
+      );
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
 
+  async registrar_evaluacion(
+    id_evaluacion: number,
+    id_estudiante: number,
 
+    )
+  {
+    try{
+      await this.evaluacionRepository.query(
+        'CALL sp_registrar_evaluacion(?,?)',
+        [
+          id_evaluacion,
+          id_estudiante,
+        ],
+      );
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
 
 }

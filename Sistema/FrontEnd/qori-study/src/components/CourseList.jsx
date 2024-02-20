@@ -5,6 +5,7 @@ import PaginationMenu from './PaginationMenu';
 
 const CourseList = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 8;
   const totalItems = 5; // Puedes ajustar la cantidad de elementos que deseas mostrar
 
@@ -12,11 +13,18 @@ const CourseList = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await http(`/curso/listadocurso?page=1&sizePage=${totalItems}`);
-      setCursos(data.cursos);
-      console.log(data.cursos);
+      try {
+        setIsLoading(true);
+        const { data } = await http(`/curso/listadocurso?page=1&sizePage=${totalItems}`);
+        setCursos(data.cursos);
+        console.log(data.cursos);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     })();
-  }, []);
+  }, [setCursos]);
 
   function generateCourseData(startId, endId) {
     return Array.from({ length: endId - startId + 1 }, (_, index) => {
@@ -51,12 +59,16 @@ const CourseList = () => {
     setCurrentPage(newPage);
   };
 
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
   return (
     <div className="course-list-container">
       <div className="course-list">
-        {cursos.map((course) => (
-          <CourseCard key={course.id} course={course} />
-        ))}
+        {!isLoading &&
+          cursos.length > 0 &&
+          cursos.map((course) => <CourseCard key={course.id} course={course} />)}
       </div>
       <div className="pagination-menu">
         <PaginationMenu

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginSignup from './components/LoginSignup';
-import MenuVertical from './components/MenuVertical';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import BotonFlotante from './components/BotonFlotante';
+import './components/BotonFlotante.css';
+import Chat from './components/Chat';
+import CourseDetail from './components/CourseDetail';
 import CoursesScreen from './components/CoursesScreen';
-import MisCursos from './components/MisCursos';
+import Evaluacion from './components/Evaluacion';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import LoginSignup from './components/LoginSignup';
+import MenuVertical from './components/MenuVertical';
+import MisCursos from './components/MisCursos';
 import Profile from './components/Profile';
-import BotonFlotante from './components/BotonFlotante';
-import Chat from './components/Chat';
-import './components/BotonFlotante.css';
-import CourseDetail from './components/CourseDetail';
 import VideoCourse from './components/VideoCourse';
-import  Evaluacion from './components/Evaluacion';
 
 function App() {
   return (
@@ -25,14 +25,14 @@ function App() {
           <Route path="/home/cursos" component={CoursesScreen} />
           <Route path="/home/miscursos" component={MisCursos} />
           <Route path="/curso/:idCurso" component={Detalle} />
-          <Route path="/course/programacion-basica" component={VideoCourse} />
+          <Route path="/video/curso/:id" component={VideoCourse} />
         </Switch>
         <BotonFlotante />
       </div>
     </Router>
   );
 }
-function Detalle(){
+function Detalle() {
   const [selectedOption, setSelectedOption] = useState('Cursos');
 
   const handleMenuClick = (option) => {

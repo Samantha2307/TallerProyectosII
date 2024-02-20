@@ -6,13 +6,17 @@ import './CourseDetail.css';
 
 const CourseDetail = () => {
   const { idCurso } = useParams();
-
+  console.log(idCurso);
   const [course, setCourse] = useState({});
 
   useEffect(() => {
     (async () => {
-      const { data } = await http(`/curso/detallecurso/${idCurso}`);
-      setCourse(data[0]);
+      try {
+        const { data } = await http(`/curso/detallecurso/${idCurso}`);
+        setCourse(data[0]);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, [idCurso]);
 
@@ -32,7 +36,6 @@ const CourseDetail = () => {
     curso_tipo,
     id_curso,
   } = course;
-  console.log(course)
 
   return (
     <div className="course-detail-container">
@@ -59,8 +62,8 @@ const CourseDetail = () => {
             <p>Duración</p>
             <p>{curso_duracion} Semanas</p>
           </div>
-          <Link to={'/course/programacion-basica'}>
-            <button className="button-1">Inscribirme</button>
+          <Link to={`/video/curso/${id_curso}`}>
+            <button className="button-1">Inscribirme2</button>
           </Link>
         </div>
       </div>

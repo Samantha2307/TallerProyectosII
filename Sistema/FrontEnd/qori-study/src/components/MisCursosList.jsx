@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 import MisCursosCard from './MisCursosCard';
 import PaginationMenu from './PaginationMenu';
+import cursosData from './jsons/miscursos.json'; // Importa los datos del archivo JSON
 
 const MisCursosList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-  const totalItems = 104; // Puedes ajustar la cantidad de elementos que deseas mostrar
-
-  function generateCourseData(startId, endId) {
-    return Array.from({ length: endId - startId + 1 }, (_, index) => {
-      const id = startId + index;
-
-      return {
-        id,
-        title: 'Diseño de Infraestructura de Residuos Sólidos',
-        subtitle: 'Curso intermedio',
-        level: 'Intermedio',
-        imageUrl: `${process.env.PUBLIC_URL}/img/cursos.png`,
-        publicacion: '15-05-2023',
-        duracion: '10 semanas',
-      };
-    });
-  }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCourses = generateCourseData(indexOfFirstItem + 1, Math.min(indexOfLastItem, totalItems));
+  const currentCourses = cursosData.cursos.slice(indexOfFirstItem, indexOfLastItem); // Utiliza los datos del archivo JSON
 
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(cursosData.totalCursos / itemsPerPage); // Utiliza el total de cursos del archivo JSON
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -36,8 +20,8 @@ const MisCursosList = () => {
   return (
     <div className="course-list-container">
       <div className="course-list">
-        {currentCourses.map((course) => (
-          <MisCursosCard key={course.id} course={course} />
+        {currentCourses.map((course, index) => (
+          <MisCursosCard key={index} course={course} /> // Usamos el índice como clave, ya que el JSON no proporciona un ID único para cada curso
         ))}
       </div>
       <div className="pagination-menu">

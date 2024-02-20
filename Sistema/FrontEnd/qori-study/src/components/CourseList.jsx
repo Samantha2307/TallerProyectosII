@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { http } from '../config/axios.config';
 import CourseCard from './CourseCard';
 import PaginationMenu from './PaginationMenu';
+import cursosData from './jsons/cursos.json'; // Importa los datos del archivo JSON
 
 const CourseList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,7 +54,7 @@ const CourseList = () => {
     Math.min(indexOfLastItem, totalItems)
   );
 
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(cursosData.totalCursos / itemsPerPage); // Utiliza el total de cursos del archivo JSON
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);

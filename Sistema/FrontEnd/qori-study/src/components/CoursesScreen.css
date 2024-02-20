@@ -22,7 +22,6 @@
   text-align: left;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
 }
 
 .filter-item {
@@ -57,17 +56,20 @@
 
 .course-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
-  grid-gap: 2%;
+  grid-template-columns: repeat(auto-fit, minmax(calc(25% - 20px), 1fr)); /* Ancho del 25% con ajuste para el espacio entre tarjetas */
+  grid-gap: 20px; /* Espacio entre las tarjetas */
 }
 
 .course-card {
+  width: 100%; 
+  max-width: 18vw; /* Ancho máximo al 100% */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
+
 
 .course-card__image {
   width: 100%;

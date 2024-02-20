@@ -1,31 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MisCursosCard from './MisCursosCard';
 import PaginationMenu from './PaginationMenu';
-import cursosData from './jsons/miscursos.json'; // Importa los datos del archivo JSON
+import { http } from '../config/axios.config'; // Importa el cliente HTTP configurado
 
-const MisCursosList = () => {
+const MisCursosList = ({ filterData }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [cursosComprados, setCursosComprados] = useState([]);
   const itemsPerPage = 8;
+  const totalItems = 5;
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCourses = cursosData.cursos.slice(indexOfFirstItem, indexOfLastItem); // Utiliza los datos del archivo JSON
+  useEffect(() => {
+    const fetchCursosComprados = async () => {
+      setIsLoading(true);
+      try {
+        let url = `/curso/cursocomprado/1?page=${currentPage}&sizePage=${itemsPerPage}`;
+        if (filterData.categoria !== 'Todas') {
+          url += `&categoria=${filterData.categoria}`;
+        }
+        if (filterData.searchTerm) {
+          url += `&nombre=${filterData.searchTerm}`;
+        }
+        const { data } = await http(url);
+        setCursosComprados(data.cursos);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const totalPages = Math.ceil(cursosData.totalCursos / itemsPerPage); // Utiliza el total de cursos del archivo JSON
+    fetchCursosComprados();
+  }, [currentPage, filterData.categoria, filterData.searchTerm]);
+
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await http(`/curso/cursocomprado/1?page=1&sizePage=${totalItems}`);
+        setCursosComprados(data.cursos);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (filterData.categoria === 'Todas') {
+      fetchAllCourses();
+    }
+  }, [filterData.categoria, totalItems]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
   return (
     <div className="course-list-container">
       <div className="course-list">
-        {currentCourses.map((course, index) => (
-          <MisCursosCard key={index} course={course} /> // Usamos el índice como clave, ya que el JSON no proporciona un ID único para cada curso
+        {cursosComprados.map((course, index) => (
+          <MisCursosCard key={index} course={course} />
         ))}
       </div>
       <div className="pagination-menu">
-        <PaginationMenu totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+        <PaginationMenu totalPages={Math.ceil(totalItems / itemsPerPage)} currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
     </div>
   );

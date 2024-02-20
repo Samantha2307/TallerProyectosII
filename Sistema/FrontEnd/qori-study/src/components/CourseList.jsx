@@ -2,59 +2,54 @@ import React, { useEffect, useState } from 'react';
 import { http } from '../config/axios.config';
 import CourseCard from './CourseCard';
 import PaginationMenu from './PaginationMenu';
-import cursosData from './jsons/cursos.json'; // Importa los datos del archivo JSON
 
-const CourseList = () => {
+const CourseList = ({ filterData }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 8;
-  const totalItems = 5; // Puedes ajustar la cantidad de elementos que deseas mostrar
-
+  const totalItems = 5;
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
-        const { data } = await http(`/curso/listadocurso?page=1&sizePage=${totalItems}`);
+        let url = `/curso/listadocurso?page=${currentPage}&sizePage=${itemsPerPage}`;
+        if (filterData.categoria !== 'Todas') {
+          url += `&categoria=${filterData.categoria}`;
+        }
+        if (filterData.searchTerm) {
+          url += `&nombre=${filterData.searchTerm}`;
+        }
+        const { data } = await http(url);
         setCursos(data.cursos);
-        console.log(data.cursos);
       } catch (error) {
         console.log(error);
       } finally {
         setIsLoading(false);
       }
-    })();
-  }, [setCursos]);
+    };
 
-  function generateCourseData(startId, endId) {
-    return Array.from({ length: endId - startId + 1 }, (_, index) => {
-      const id = startId + index;
+    fetchData();
+  }, [currentPage, filterData.categoria, filterData.searchTerm]); 
 
-      return {
-        id,
-        title: 'Diseño de Infraestructura de Residuos Sólidos',
-        subtitle: 'Curso intermedio',
-        level: 'Intermedio',
-        imageUrl: `${process.env.PUBLIC_URL}/img/cursos.png`,
-        price: {
-          original: '112.90',
-          discounted: 'GRATUITO',
-        },
-        publicacion: '15-05-2023',
-        duracion: '4 semanas',
-      };
-    });
-  }
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await http(`/curso/listadocurso?page=1&sizePage=${totalItems}`);
+        setCursos(data.cursos);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCourses = generateCourseData(
-    indexOfFirstItem + 1,
-    Math.min(indexOfLastItem, totalItems)
-  );
-
-  const totalPages = Math.ceil(cursosData.totalCursos / itemsPerPage); // Utiliza el total de cursos del archivo JSON
+    if (filterData.categoria === 'Todas') {
+      fetchAllCourses();
+    }
+  }, [filterData.categoria, totalItems]); 
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -73,7 +68,7 @@ const CourseList = () => {
       </div>
       <div className="pagination-menu">
         <PaginationMenu
-          totalPages={totalPages}
+          totalPages={Math.ceil(totalItems / itemsPerPage)}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />

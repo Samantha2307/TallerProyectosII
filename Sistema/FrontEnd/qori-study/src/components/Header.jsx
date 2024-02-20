@@ -29,15 +29,12 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="search-container">
-        <input type="text" placeholder="Buscar curso..." className="search-input" />
-      </div>
       <div className="header__user-menu" ref={menuRef}>
         <button className="profile-button" onClick={toggleMenu}>
           <img src={`${process.env.PUBLIC_URL}/img/perfil.png`} alt="Perfil" />
         </button>
         {isMenuOpen && (
-          <div className="header__user-menu-items">
+          <div className="header__user-menu-items"> 
             {
             <ul>
               <li><a href="/home/perfil" onClick={handleOptionClick}>Editar Perfil</a></li>

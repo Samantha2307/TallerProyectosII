@@ -131,8 +131,7 @@ export const Profile = () => {
         <div class="container-datos">
           <img
             src={usuario.usuario_imagen}
-            className="imagen-circular"
-            alt="Imagen Circular"
+            className="imagen-c"
           />
           <div class='datos'>
             <ProfileInfo value={usuario.nombre}/>

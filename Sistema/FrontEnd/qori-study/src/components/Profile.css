@@ -17,12 +17,14 @@
     padding-bottom: 5%;
     background: #262626;
 }
-.imagen-circular {
+.imagen-c {
     border-radius: 50%;
-    width: 10%; 
-    height: 10%; 
     object-fit: cover;
+    width: 100px; 
+    height: 100px; 
+ 
 }
+
 .datos{
     width: 100%;
     padding-left: 2%;

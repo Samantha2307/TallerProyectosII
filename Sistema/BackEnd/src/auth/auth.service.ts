@@ -38,19 +38,15 @@ export class AuthService {
                   }
                 else
                 {
-
                     const[datos] = await this.authRepository.query(
-
                         'CALL validar_contraseña_usuario(?)',
                         [logindto.correo]
                     );
                     return datos;
-                    
                 }
             }
         } catch (error) {
             throw new Error('Error al recibir datos de inicio Sesion: ' + error.message);
         }
     }
-
 }

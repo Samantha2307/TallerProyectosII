@@ -99,6 +99,24 @@ export class EvaluacionService {
 
   }
 
+  async alternativas(
+    id_evaluacion: number)
+  {
+    try{
+      const [alternativas] = await this.evaluacionRepository.query(
+        'CALL sp_listar_alternativas_evaluacion(?)',
+        [
+          id_evaluacion
+        ],
+      );
+      return alternativas
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
+
 
 
 

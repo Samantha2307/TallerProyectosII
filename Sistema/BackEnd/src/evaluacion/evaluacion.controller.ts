@@ -115,5 +115,30 @@ export class EvaluacionController {
     }
   }
 
+  @Get('listarAlternativas/:idevaluacion')
+  @ApiHeader({
+    name: 'api-key',
+    description: 'Contra de API',
+  })
+  @ApiOperation({
+    summary: 'Listar alternativas',
+    description: 'Esta APi permite listar alternativas sp_listar_alternativas_evaluacion(?)'
+  })
+  async listaralternativas(
+    @Param('idevaluacion') id_evaluacion: number, 
+  )
+  {
+    try {
+      return this.evaluacionService.alternativas(
+        id_evaluacion
+      )
+    } catch (error) {
+      return {
+        error: 'No se pudo obtener la lista de alternativas',
+        message: error.message,
+      };
+    }
+  }
+
   
 }

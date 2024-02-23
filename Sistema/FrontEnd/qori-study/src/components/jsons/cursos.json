@@ -35,6 +35,13 @@
       "curso_nombre": "Inglés Intermedio",
       "curso_fecha_inicio": "2024-02-01T05:00:00.000Z",
       "curso_duracion": 255
+    },
+    {
+      "id_curso": 6,
+      "curso_imagen": "https://sarahcentrodeidiomas.com/wp-content/uploads/2021/05/CURSO-DE-INGLES-B2-INTERMEDIO.png",
+      "curso_nombre": "Inglés Avanzado",
+      "curso_fecha_inicio": "2024-03-28T05:00:00.000Z",
+      "curso_duracion": 270
     }
   ]
 }

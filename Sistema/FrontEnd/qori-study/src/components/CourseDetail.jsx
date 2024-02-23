@@ -3,11 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { http } from '../config/axios.config';
 import { parseDate } from '../utils/parseDate';
 import './CourseDetail.css';
+import { useAuth } from '../AuthContext';
 
 const CourseDetail = () => {
   const { idCurso } = useParams();
   console.log(idCurso);
   const [course, setCourse] = useState({});
+  const { userId } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -37,6 +39,15 @@ const CourseDetail = () => {
     id_curso,
   } = course;
 
+  const registerPurchase = async () => {
+    try {
+      const response = await http.post(`/curso/registrarcompra/${userId}/${id_curso}`);
+      console.log(response.data.mensaje); 
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="course-detail-container">
       <div>
@@ -63,7 +74,9 @@ const CourseDetail = () => {
             <p>{curso_duracion} Semanas</p>
           </div>
           <Link to={`/video/curso/${id_curso}`}>
-            <button className="button-1">Inscribirme2</button>
+          <button className="button-1" onClick={registerPurchase}>
+            Inscribirme2
+          </button>
           </Link>
         </div>
       </div>

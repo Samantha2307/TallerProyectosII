@@ -10,52 +10,72 @@ export const Profile = () => {
   const [usuario, setUsuario] = useState('');
   const [user, setDatosUsuario] = useState('');
   const [selectedOption, setSelectedOption] = useState('Datos Personales');
+  const [isLoading, setIsLoading] = useState(true);
+  const [pais, setPais] = useState('');
+  const [celular, setCelular] = useState('');
   const { userId } = useAuth();
   
-    const fetchPerfilUsuario = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrarPerfil/${userId}`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Error al obtener el perfil del usuario');
+        const [perfilResponse, datosResponse] = await Promise.all([
+          fetchPerfilUsuario(),
+          fetchDatosUsuario()
+        ]);
+        if (perfilResponse.ok && datosResponse.ok) {
+          setIsLoading(false);
+        } else {
+          throw new Error('Error al obtener el perfil o los datos del usuario');
         }
-        else{
-          const data = await response.json();
-        setUsuario(data.perfilUsuario[0]);
-        }
-        
       } catch (error) {
         console.error('Error:', error);
         setErrorPopupVisible(true);
-        setMensajePopup('Error al obtener el perfil del usuario');
-      }
-    };
-    const fetchDatosUsuario = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrardatos/${userId}`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos del usuario');
-        }
-        const data = await response.json();
-        setDatosUsuario(data.datosUsuario[0]);
-      } catch (error) {
-        console.error('Error:', error);
-        setErrorPopupVisible(true);
-        setMensajePopup('Error al obtener los datos del usuario');
+        setMensajePopup('Error al obtener el perfil o los datos del usuario');
       }
     };
 
-    fetchPerfilUsuario();
-    fetchDatosUsuario();
+    fetchData();
+  }, []);
+
+  const fetchPerfilUsuario = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrarPerfil/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Error al obtener el perfil del usuario');
+      }
+      const data = await response.json();
+      setUsuario(data.perfilUsuario[0]);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  };
+
+  const fetchDatosUsuario = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrardatos/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Error al obtener los datos del usuario');
+      }
+      const data = await response.json();
+      setDatosUsuario(data.datosUsuario[0]);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  };
   
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -101,7 +121,7 @@ export const Profile = () => {
   const actualizarDatos = async () => {
     try {
       const response = await fetch(
-      `http://localhost:4000/api/v1/perfil/aDatosPersonales/902259917/peru/${userId}`,
+      `http://localhost:4000/api/v1/perfil/aDatosPersonales/${celular}/${pais}/${userId}`,
         {
           method: 'POST',
           headers: {
@@ -248,6 +268,7 @@ export const Profile = () => {
                     className="datos-container"
                     type="phone"
                     Value={user.usuario_telefono}
+                    onChange={(e) => setCelular(e.target.value)}
                   />
                 </div>
               </div>
@@ -258,6 +279,7 @@ export const Profile = () => {
                     className="datos-container"
                     type="text"
                     Value={user.usuario_pais}
+                    onChange={(e) => setPais(e.target.value)}
                   />
                 </div>
               </div>

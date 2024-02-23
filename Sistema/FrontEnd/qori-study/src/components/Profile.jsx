@@ -1,17 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import ProfileInfo from './ProfileInfo';
-import datoslUsuario from './jsons/datosUsuario.json';
-import perfilUsuario from './jsons/perfilUsuario.json';
+import { useAuth } from '../AuthContext';
 
 export const Profile = () => {
   const [errorPopupVisible, setErrorPopupVisible] = useState(false);
   const [mensajePopup, setMensajePopup] = useState(null);
   const [successPopupVisible, setSuccessPopupVisible] = useState(false);
-  const usuario = perfilUsuario.perfilUsuario[0];
-  const user = datoslUsuario.datosUsuario[0];
+  const [usuario, setUsuario] = useState('');
+  const [user, setDatosUsuario] = useState('');
   const [selectedOption, setSelectedOption] = useState('Datos Personales');
+  const { userId } = useAuth();
+  
+    const fetchPerfilUsuario = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrarPerfil/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error al obtener el perfil del usuario');
+        }
+        else{
+          const data = await response.json();
+        setUsuario(data.perfilUsuario[0]);
+        }
+        
+      } catch (error) {
+        console.error('Error:', error);
+        setErrorPopupVisible(true);
+        setMensajePopup('Error al obtener el perfil del usuario');
+      }
+    };
+    const fetchDatosUsuario = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/api/v1/perfil/mostrardatos/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos del usuario');
+        }
+        const data = await response.json();
+        setDatosUsuario(data.datosUsuario[0]);
+      } catch (error) {
+        console.error('Error:', error);
+        setErrorPopupVisible(true);
+        setMensajePopup('Error al obtener los datos del usuario');
+      }
+    };
 
+    fetchPerfilUsuario();
+    fetchDatosUsuario();
+  
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
@@ -56,7 +101,7 @@ export const Profile = () => {
   const actualizarDatos = async () => {
     try {
       const response = await fetch(
-        'http://localhost:4000/api/v1/perfil/aDatosPersonales/902259917/peru/6',
+      `http://localhost:4000/api/v1/perfil/aDatosPersonales/902259917/peru/${userId}`,
         {
           method: 'POST',
           headers: {
@@ -85,7 +130,7 @@ export const Profile = () => {
   const actualizarContraseña = async () => {
     try {
       const response = await fetch(
-        'http://localhost:4000/api/v1/perfil/aPassword/sbkdak/1',
+        `http://localhost:4000/api/v1/perfil/aPassword/sbkdak/${userId}`,
         {
           method: 'POST',
           headers: {
@@ -106,7 +151,7 @@ export const Profile = () => {
   };
   const cambiarFoto = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/v1/perfil/aImagen/a/1', {
+      const response = await fetch(`http://localhost:4000/api/v1/perfil/aImagen/a/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

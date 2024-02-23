@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MisCursosCard from './MisCursosCard';
 import PaginationMenu from './PaginationMenu';
-import { http } from '../config/axios.config'; // Importa el cliente HTTP configurado
+import { http } from '../config/axios.config';
+import { useAuth } from '../AuthContext';
 
 const MisCursosList = ({ filterData }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -9,12 +10,12 @@ const MisCursosList = ({ filterData }) => {
   const [cursosComprados, setCursosComprados] = useState([]);
   const itemsPerPage = 8;
   const totalItems = 5;
-
+  const { userId } = useAuth();
   useEffect(() => {
     const fetchCursosComprados = async () => {
       setIsLoading(true);
       try {
-        let url = `/curso/cursocomprado/1?page=${currentPage}&sizePage=${itemsPerPage}`;
+        let url = `/curso/cursocomprado/${userId}?page=${currentPage}&sizePage=${itemsPerPage}`;
         if (filterData.categoria !== 'Todas') {
           url += `&categoria=${filterData.categoria}`;
         }
@@ -37,7 +38,7 @@ const MisCursosList = ({ filterData }) => {
     const fetchAllCourses = async () => {
       setIsLoading(true);
       try {
-        const { data } = await http(`/curso/cursocomprado/1?page=1&sizePage=${totalItems}`);
+        const { data } = await http(`/curso/cursocomprado/${userId}?page=1&sizePage=${totalItems}`);
         setCursosComprados(data.cursos);
       } catch (error) {
         console.log(error);

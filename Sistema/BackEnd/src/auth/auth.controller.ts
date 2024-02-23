@@ -22,7 +22,13 @@ export class AuthController {
         return await this.authService.login(logindto);
     } catch (error) {
       
-        return {error: 'Error al iniciar sesión' };
+      
+        return {
+          status: 'error',
+          message: 'Error al iniciar sesión',
+          statusCode: 500, 
+        };
+    
     }
   }
 }

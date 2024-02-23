@@ -25,7 +25,7 @@ export class SesionService {
 
       const hashedPassword = await bcrypt.hash(sesionregistrarDto.password, 10);
     
-      await this.sesionRepository.query(
+      const [sesion] = await this.sesionRepository.query(
         'CALL sp_regitrar_usuario(?,?,?,?,?,?,?)',
         [
           sesionregistrarDto.nombres,
@@ -37,12 +37,14 @@ export class SesionService {
           sesionregistrarDto.numero, 
         ],
       );
+
+      return sesion;
     }
     catch (error) {
       console.log(error);
       throw new Error ('Error al obtener cursos: '+error.message);
-    }
-  }
+    }
+  }
 
 
 }

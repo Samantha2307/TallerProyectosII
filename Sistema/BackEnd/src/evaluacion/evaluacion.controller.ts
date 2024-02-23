@@ -115,5 +115,86 @@ export class EvaluacionController {
     }
   }
 
-  
+  @Get('listarAlternativas/:idevaluacion')
+  @ApiHeader({
+    name: 'api-key',
+    description: 'Contra de API',
+  })
+  @ApiOperation({
+    summary: 'Listar alternativas',
+    description: 'Esta APi permite listar alternativas sp_listar_alternativas_evaluacion(?)'
+  })
+  async listaralternativas(
+    @Param('idevaluacion') id_evaluacion: number, 
+  )
+  {
+    try {
+      return this.evaluacionService.alternativas(
+        id_evaluacion
+      )
+    } catch (error) {
+      return {
+        error: 'No se pudo obtener la lista de alternativas',
+        message: error.message,
+      };
+    }
+  }
+
+  @Post('RegistrarRespuesta/:iddetalleevaluacion/:idevaluacion/:idpregunta/:idalternativa')
+  @ApiHeader({
+    name: 'api-key',
+    description: 'Contra de API',
+  })
+  @ApiOperation({
+    summary: 'Listar alternativas',
+    description: 'Esta APi permite listar alternativas sp_registrar_respuesta_estudiante(?,?,?,?)'
+  })
+  async registrar_respuesta(
+    @Param('iddetalleevaluacion') id_detalle_evaluacion: number,
+    @Param('idevaluacion') id_evaluacion: number,
+    @Param('idpregunta') id_pregunta: number,
+    @Param('idalternativa') id_alternativa: number 
+  )
+  {
+    try {
+      await this.evaluacionService.registrar_respuesta(
+        id_detalle_evaluacion,
+        id_evaluacion,
+        id_pregunta,
+        id_alternativa,
+      )
+    } catch (error) {
+      return {
+        error: 'No se pudo obtener la lista de alternativas',
+        message: error.message,
+      };
+    }
+  }
+
+  @Post('RegistrarEvaluacion/:idevaluacion/:idestudiante')
+  @ApiHeader({
+    name: 'api-key',
+    description: 'Contra de API',
+  })
+  @ApiOperation({
+    summary: 'Listar alternativas',
+    description: 'Esta APi permite listar alternativas sp_registrar_respuesta_estudiante(?,?,?,?)'
+  })
+  async registrar_evaluacion(
+    @Param('idevaluacion') id_evaluacion: number,
+    @Param('idestudiante') id_estudiante: number
+  )
+  {
+    try {
+      await this.evaluacionService.registrar_evaluacion(
+        id_evaluacion,
+        id_estudiante,
+      )
+    } catch (error) {
+      return {
+        error: 'No se pudo obtener la lista de alternativas',
+        message: error.message,
+      };
+    }
+  }
 }

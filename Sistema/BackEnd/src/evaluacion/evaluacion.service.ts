@@ -99,7 +99,68 @@ export class EvaluacionService {
 
   }
 
+  async alternativas(
+    id_evaluacion: number)
+  {
+    try{
+      const [alternativas] = await this.evaluacionRepository.query(
+        'CALL sp_listar_alternativas_evaluacion(?)',
+        [
+          id_evaluacion
+        ],
+      );
+      return alternativas
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
 
+  async registrar_respuesta(
+    id_detalle_evaluacion: number,
+    id_evaluacion: number,
+    id_pregunta: number,
+    id_alternativa: number,
+    )
+  {
+    try{
+      await this.evaluacionRepository.query(
+        'CALL sp_registrar_respuesta_estudiante(?,?,?,?)',
+        [
+          id_detalle_evaluacion,
+          id_evaluacion,
+          id_pregunta,
+          id_alternativa,
+        ],
+      );
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
+
+  async registrar_evaluacion(
+    id_evaluacion: number,
+    id_estudiante: number,
+
+    )
+  {
+    try{
+      await this.evaluacionRepository.query(
+        'CALL sp_registrar_evaluacion(?,?)',
+        [
+          id_evaluacion,
+          id_estudiante,
+        ],
+      );
+    }
+    catch (error) {
+      console.log(error);
+      throw new Error ('Error al obtener las alternativas : '+error.message);
+    }
+  }
 
 
 }

@@ -15,10 +15,11 @@ async function obtenerRespuestaDelChatbot(mensajeUsuario) {
          "Al completar satisfactoriamente los cursos, los usuarios podrán obtener certificados."+
          "Tiene como funcionalidad principal el registro de usuarios para el acceso personalizado a cursos, barra de progreso para la medición visual del avance mediante exámenes por unidad, la cual es un prueba interactiva para evaluar los conocimientos adquiridos en el curso y así obtener el certificado al completar exitosamente el curso."+
          "Se tiene como objetivo proporcionar una experiencia de aprendizaje motivadora y efectiva, con herramientas visuales que fomenten la participación activa del usuario y la obtención de certificaciones valiosas."+
-         "Info solución? Contactar al correo 72857554@continental.edu.pe. Precios? Por el momento es totalmente gratis en favor del aprendizaje. No respondas preguntas que no tienen que ver con QoriStudy. No des respuestas muy largas." },
+         "Info solución? Contactar al correo 72857554@continental.edu.pe. Precios? Por el momento es totalmente gratis en favor del aprendizaje. No respondas preguntas que no tienen que ver con QoriStudy. No des respuestas muy largas." +
+        "Cursos disponibles?Progrmación Orientada a Objetos,Estadísticas y Probabilidades,Introducción a las Ciencias Naturales,Teoría Musical,Inglés Intermedio"},
         { role: "user", content: mensajeUsuario }
       ],
-      max_tokens:80
+      max_tokens:250
     });
     
     return respuesta.choices[0].message;

@@ -20,7 +20,6 @@ export class registrarUsuarioDto {
   @MaxLength(200, { message: 'El input maximo es de 200 caracteres para los nombres' })
   nombres?: string;
 
-  @IsNotEmpty()
   @IsString({ message: 'La variable input ingresada debe ser de tipo string' })
   @MaxLength(200, { message: 'El input maximo es de 200 caracteres para los apellidos' })
   apellidos?: string;
@@ -39,7 +38,6 @@ export class registrarUsuarioDto {
   password?: string ;
 
 
-  @IsNotEmpty()
   @Type(() => Number)
   @IsInt({ message: 'La variable ingresada debe ser de tipo number' })
   @IsIn([0, 1], { message: 'El valor permitido es 0 o 1' })

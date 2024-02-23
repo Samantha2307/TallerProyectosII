@@ -13,7 +13,7 @@ export class loginDto{
     @MinLength(5, {
         message: 'La contraseña no puede tener menos de 5 caracteres',
     })
-    @MaxLength(20, {
+    @MaxLength(100, {
         message: 'La contraseña no puede tener mas de 20 caracteres',
     })
     @IsNotEmpty({ message: 'La contraseña es requerida' })
